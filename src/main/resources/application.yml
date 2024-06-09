@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: Question
+  datasource:
+    url: jdbc:postgresql://localhost:5432/questions
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
