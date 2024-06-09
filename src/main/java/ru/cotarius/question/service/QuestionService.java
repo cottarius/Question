@@ -1,14 +1,23 @@
 package ru.cotarius.question.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.cotarius.question.entity.Question;
+import ru.cotarius.question.repository.QuestionRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public interface QuestionService {
+@RequiredArgsConstructor
+public class QuestionService{
+    private final QuestionRepository questionRepository;
 
-    Optional<Question> findById(long id);
-    List<Question> findAll();
+    public Optional<Question> findById(long id) {
+        return questionRepository.findById(id);
+    }
+
+    public List<Question> findAll() {
+        return questionRepository.findAll();
+    }
 }

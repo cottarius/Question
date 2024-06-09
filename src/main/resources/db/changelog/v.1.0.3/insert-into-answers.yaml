@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-answers
+      author: cotarius
+
+  - include:
+      file: /sql/insert-into-answers.sql

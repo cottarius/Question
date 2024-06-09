@@ -7,6 +7,23 @@
 <body>
 
 <div th:text="${question.getQuestion()}"></div>
+<br>
+<br>
+<button onclick="showAnswer()">Показать ответ</button>
+<br><br>
+<div id="answer" style="display: none;"> <span th:utext="${#strings.replace(answer.getAnswer(), '\n', '<br>')}"></span> </div>
+<br><br>
+
+<button onclick="reloadPage()">Следующий вопрос</button>
+
+<script>
+    function showAnswer() {
+        document.getElementById("answer").style.display = "block";
+    }
+    function reloadPage() {
+        location.reload();
+    }
+</script>
 
 </body>
 </html>
