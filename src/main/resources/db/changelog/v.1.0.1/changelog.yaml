@@ -4,5 +4,5 @@ databaseChangeLog:
       author: cotarius"
 
   - include:
-      file: "insert-into-questions.yaml"
+      file: "insert-into-questions-core1.yaml"
       relativeToChangelogFile: true

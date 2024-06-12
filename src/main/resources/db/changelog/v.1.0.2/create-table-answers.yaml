@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: create-table-answers
-      author: cotarius
-
-  - include:
-      file: /sql/create-table-answers.sql

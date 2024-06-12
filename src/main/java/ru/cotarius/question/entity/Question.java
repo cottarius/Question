@@ -14,7 +14,10 @@ public class Question {
 
     private String question;
 
+    private String answer;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "theme")
     private Theme theme;
 
     @Column(name = "is_impotent")

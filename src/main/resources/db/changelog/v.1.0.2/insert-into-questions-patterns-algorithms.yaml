@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-questions-patterns
+      author: cotarius
+
+  - include:
+      file: /sql/insert-into-questions-patterns-algorithms.sql
