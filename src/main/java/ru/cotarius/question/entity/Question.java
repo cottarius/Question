@@ -14,6 +14,9 @@ public class Question {
 
     private String question;
 
+    @Enumerated(EnumType.STRING)
+    private Theme theme;
+
     @Column(name = "is_impotent")
     private boolean isImpotent;
 }
