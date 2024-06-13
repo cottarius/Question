@@ -51,8 +51,28 @@ public class QuestionController {
                 coreQuestions.add(question);
             }
         }
-        int randomIndex = random.nextInt(coreQuestions.size());
-        Question question = coreQuestions.get(randomIndex);
+//        int randomIndex = random.nextInt(coreQuestions.size());
+        if (index >= coreQuestions.size()) {
+            index = 0;
+        }
+        Question question = coreQuestions.get(index++);
+        model.addAttribute("question", question);
+        return "questions";
+    }
+
+    @GetMapping("/core2")
+    public String getCore2Questions(Model model) {
+        List<Question> core2Questions = new ArrayList<>();
+        for (Question question : questionService.findAll()) {
+            if (question.getTheme().equals(Theme.CORE2_COLLECTIONS)) {
+                core2Questions.add(question);
+            }
+        }
+//        int randomIndex = random.nextInt(coreQuestions.size());
+        if (index >= core2Questions.size()) {
+            index = 0;
+        }
+        Question question = core2Questions.get(index++);
         model.addAttribute("question", question);
         return "questions";
     }
@@ -73,8 +93,11 @@ public class QuestionController {
                 patternsQuestions.add(question);
             }
         }
-        int randomNumber = random.nextInt(1, patternsQuestions.size());
-        Question question = patternsQuestions.get(randomNumber);
+//        int randomNumber = random.nextInt(1, patternsQuestions.size());
+        if (index >= patternsQuestions.size()) {
+            index = 0;
+        }
+        Question question = patternsQuestions.get(index++);
         model.addAttribute("question", question);
         return "questions";
     }
