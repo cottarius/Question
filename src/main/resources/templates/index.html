@@ -22,16 +22,48 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/index}">Main Page</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/all}">All Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/primary}">Primary Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/core}">Java Core</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/patterns}">Patterns</a>
+            </li>
         </ul>
     </div>
 </nav>
 
 <div class="container mt-3">
-    <h1>Welcome to Java Quizzer!</h1>
-    <a th:href="@{/all}" class="btn btn-primary">All Questions</a>
-    <a th:href="@{/primary}" class="btn btn-warning">Primary questions</a>
-    <a th:href="@{/core}" class="btn btn-primary">Java Core</a>
-    <a th:href="@{/patterns}" class="btn btn-primary">Patterns and Algorithms</a>
+    <h1>
+        <p class="font-italic">Welcome to Java Quizzer!</p>
+    </h1>
+    <br><br>
+    <h2>
+        <p class="font-weight-bold">List of Topics</p>
+    </h2>
+    <br>
+    <h3>
+        <p class="font-weight-normal">All Questions</p>
+    </h3>
+    <h3>
+        <p class="font-weight-normal">Primary Questions</p>
+    </h3>
+    <h3>
+        <p class="font-weight-normal">Java Core</p>
+    </h3>
+    <h3>
+        <p class="font-weight-normal">Patterns</p>
+    </h3>
+
+<!--    <a th:href="@{/all}" class="btn btn-primary">All Questions</a>-->
+<!--    <a th:href="@{/primary}" class="btn btn-warning">Primary questions</a>-->
+<!--    <a th:href="@{/core}" class="btn btn-primary">Java Core</a>-->
+<!--    <a th:href="@{/patterns}" class="btn btn-primary">Patterns and Algorithms</a>-->
 </div>
 
 <!--<button onclick="window.location.href='/patterns'">Алгоритмы и Паттерны</button>-->

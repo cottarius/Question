@@ -18,7 +18,13 @@ import java.util.Random;
 public class QuestionController {
     private final QuestionService questionService;
     private final Random random = new Random();
+    private int index = 0;
 
+//    @GetMapping("/next-question")
+//    public String getNextQuestion() {
+//        index++;
+//        return "redirect:/primary";
+//    }
 
     @GetMapping("/primary")
     public String getPrimaryQuestions(Model model) {
@@ -28,8 +34,11 @@ public class QuestionController {
                 primaryQuestions.add(question);
             }
         }
-        int randomIndex = random.nextInt(primaryQuestions.size());
-        Question question = primaryQuestions.get(randomIndex);
+//        int randomIndex = random.nextInt(primaryQuestions.size());
+        if (index >= primaryQuestions.size()) {
+            index = 0;
+        }
+        Question question = primaryQuestions.get(index++);
         model.addAttribute("question", question);
         return "questions";
     }

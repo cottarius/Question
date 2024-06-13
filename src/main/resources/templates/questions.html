@@ -9,7 +9,7 @@
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Java Quizzer</a>
+    <a class="navbar-brand" >Java Quizzer</a>
 
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -22,6 +22,18 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/index}">Main Page</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/all}">All Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/primary}">Primary Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/core}">Java Core</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/patterns}">Patterns</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -32,16 +44,18 @@
     </h1>
     <br>
     <br>
-    <button onclick="showAnswer()">Показать ответ</button>
+    <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
     <br><br>
     <h5>
         <div id="answer" style="display: none;"><span
                 th:utext="${#strings.replace(question.getAnswer(), '\n', '<br>')}"></span>
         </div>
     </h5>
+
     <br><br>
 
-    <button onclick="reloadPage()">Следующий вопрос</button>
+<!--    <a th:href="@{/next-question}" class="btn btn-success">Next Question</a>-->
+    <button onclick="reloadPage()" class="btn btn-success">Следующий вопрос</button>
 
     <br><br>
 <!--    <a th:href="@{/index}">Вернуться на главную страницу</a>-->
