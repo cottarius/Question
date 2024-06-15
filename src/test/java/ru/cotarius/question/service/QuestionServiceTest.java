@@ -119,4 +119,21 @@ public class QuestionServiceTest {
         assertThat(primaryQuestions).isNotNull();
         assertThat(primaryQuestions.get(0)).isEqualTo(core1Question);
     }
+
+    @Test
+    public void QuestionRepositoryFindAllShouldReturnAllQuestions() {
+        List<Question> questionList = questionService.findAll();
+
+        assertThat(questionList.size()).isEqualTo(8);
+        assertThat(questionList.get(0)).isEqualTo(core1Question);
+        assertThat(questionList).isNotNull();
+    }
+
+    @Test
+    public void QuestionRepositoryFindByIdShouldReturnQuestion() {
+        Question question = questionService.findById(core1Question.getId()).get();
+
+        assertThat(question.getId()).isEqualTo(core1Question.getId());
+        assertThat(questionService).isNotNull();
+    }
 }

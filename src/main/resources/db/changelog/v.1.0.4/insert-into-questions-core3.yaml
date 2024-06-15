@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-into-questions-core2
+      id: insert-into-questions-core3
       author: cotarius
 
   - include:
