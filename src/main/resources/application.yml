@@ -2,7 +2,7 @@ spring:
   application:
     name: Question
   datasource:
-    url: jdbc:postgresql://localhost:5432/questions
+    url: jdbc:postgresql://localhost:5432/questionsdb
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
