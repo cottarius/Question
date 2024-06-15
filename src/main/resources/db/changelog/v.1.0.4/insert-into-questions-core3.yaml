@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-questions-core2
+      author: cotarius
+
+  - include:
+      file: /sql/insert-into-questions-core3.sql

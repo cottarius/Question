@@ -1,4 +1,0 @@
-CREATE TABLE themes (
-    id BIGSERIAL PRIMARY KEY ,
-    title VARCHAR(128) NOT NULL
-);

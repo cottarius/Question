@@ -20,59 +20,38 @@ public class QuestionController {
     private final Random random = new Random();
     private int index = 0;
 
+
 //    @GetMapping("/next-question")
 //    public String getNextQuestion() {
 //        index++;
 //        return "redirect:/primary";
 //    }
 
+
     @GetMapping("/primary")
     public String getPrimaryQuestions(Model model) {
-        List<Question> primaryQuestions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.isImpotent()){
-                primaryQuestions.add(question);
-            }
-        }
-//        int randomIndex = random.nextInt(primaryQuestions.size());
-        if (index >= primaryQuestions.size()) {
-            index = 0;
-        }
-        Question question = primaryQuestions.get(index++);
+        Question question = questionService.getQuestionFromPrimaryQuestions(index++);
         model.addAttribute("question", question);
         return "questions";
     }
 
     @GetMapping("/core")
-    public String getCoreQuestions(Model model) {
-        List<Question> coreQuestions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.getTheme().equals(Theme.CORE1)) {
-                coreQuestions.add(question);
-            }
-        }
-//        int randomIndex = random.nextInt(coreQuestions.size());
-        if (index >= coreQuestions.size()) {
-            index = 0;
-        }
-        Question question = coreQuestions.get(index++);
+    public String getCore1Questions(Model model) {
+        Question question = questionService.getQuestionFromCore1Questions(index++);
         model.addAttribute("question", question);
         return "questions";
     }
 
     @GetMapping("/core2")
     public String getCore2Questions(Model model) {
-        List<Question> core2Questions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.getTheme().equals(Theme.CORE2_COLLECTIONS)) {
-                core2Questions.add(question);
-            }
-        }
-//        int randomIndex = random.nextInt(coreQuestions.size());
-        if (index >= core2Questions.size()) {
-            index = 0;
-        }
-        Question question = core2Questions.get(index++);
+        Question question = questionService.getQuestionFromCore2Questions(index++);
+        model.addAttribute("question", question);
+        return "questions";
+    }
+
+    @GetMapping("/core3")
+    public String getCore3Questions(Model model) {
+        Question question = questionService.getQuestionFromCore3Questions(index++);
         model.addAttribute("question", question);
         return "questions";
     }
