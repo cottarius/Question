@@ -164,7 +164,7 @@ HashSet обеспечивает постоянную производитель
        ('Какую коллекцию можно использовать для реализации FIFO?', 'Queue (PriorityQueue)', 'CORE2_COLLECTIONS', false),
        ('Какую коллекцию можно использовать для реализации LIFO?', 'Stack, ArrayDeque', 'CORE2_COLLECTIONS', false),
        ('Начальная емкость коллекций?', '- ArrayList - 10 элементов.** Новая емкость рассчитывается как (старая емкость * 3) / 2 + 1.\n\n - LinkedList - 0\n\n
-- HashMap, HashSet, LinkedHashSet, TreeSet, ArrayDeque - 16 элементов. Коэффициент загрузки 0.75
+- HashMap, HashSet, LinkedHashSet, TreeSet, ArrayDeque - 16 элементов. Коэффициент загрузки 0.75\n
 - PriorityQueue - 11 элементов. Коэффициент загрузки 0.75', 'CORE2_COLLECTIONS', true),
        ('Что такое функциональный интерфейс, и как он используется в Java?', 'Это интерфейс, который содержит только 1 абстрактный метод.\n
 Интерфейс может включать сколько угодно default (и static) методов и при этом оставаться функциональным, потому что default методы - не абстрактные.', 'CORE2_COLLECTIONS', false),
