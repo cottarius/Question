@@ -36,9 +36,9 @@ public class QuestionServiceTest {
         core1Question = new Question(1L, "Вопрос 1", "Ответ 1", Theme.CORE1, true);
         core2Question = new Question(2L, "Вопрос 2", "Ответ 2", Theme.CORE2_COLLECTIONS, false);
         core3Question = new Question(3L, "Вопрос 3", "Ответ 3", Theme.CORE3_MULTITHREADING, true);
-        dataBaseQuestion = new Question(4L, "Вопрос 4", "Ответ 4", Theme.SPRING, false);
+        dataBaseQuestion = new Question(4L, "Вопрос 4", "Ответ 4", Theme.SQL_DATABASE, false);
         hibernateQuestion = new Question(5L, "Вопрос 5", "Ответ 5", Theme.HIBERNATE_JDBC, true);
-        springQuestion = new Question(6L, "Вопрос 6", "Ответ 6", Theme.SQL_DATABASE, false);
+        springQuestion = new Question(6L, "Вопрос 6", "Ответ 6", Theme.SPRING, false);
         patternQuestion = new Question(7L, "Вопрос 7", "Ответ 7", Theme.PATTERNS_ALGORITHMS, true);
         technologiesQuestion = new Question(8L, "Вопрос 8", "Ответ 8", Theme.FASHION_TECHNOLOGIES, false);
 
@@ -50,6 +50,22 @@ public class QuestionServiceTest {
         questionService.save(springQuestion);
         questionService.save(patternQuestion);
         questionService.save(technologiesQuestion);
+    }
+
+    @Test
+    public void getSqlQuestionsShouldReturnSqlQuestions() {
+        List<Question> sqlQuestions = new ArrayList<>();
+        for (Question question : questionService.findAll()) {
+            if (question.getTheme() == Theme.SQL_DATABASE) {
+                sqlQuestions.add(question);
+            }
+        }
+        for (Question question : sqlQuestions) {
+            assertThat(question.getTheme().equals(Theme.SQL_DATABASE)).isTrue();
+        }
+        assertThat(sqlQuestions.size()).isEqualTo(1);
+        assertThat(sqlQuestions).isNotNull();
+        assertThat(sqlQuestions.get(0)).isEqualTo(dataBaseQuestion);
     }
 
     @Test

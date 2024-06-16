@@ -18,7 +18,7 @@ import java.util.Random;
 public class QuestionController {
     private final QuestionService questionService;
     private final Random random = new Random();
-    private int index = 0;
+//    private int index = 32;
 
 
 //    @GetMapping("/next-question")
@@ -27,31 +27,37 @@ public class QuestionController {
 //        return "redirect:/primary";
 //    }
 
+    @GetMapping("/sql")
+    public String getSqlQuestion(Model model) {
+        Question question = questionService.getQuestionFromSqlQuestions();
+        model.addAttribute("question", question);
+        return "questions";
+    }
 
     @GetMapping("/primary")
     public String getPrimaryQuestions(Model model) {
-        Question question = questionService.getQuestionFromPrimaryQuestions(index++);
+        Question question = questionService.getQuestionFromPrimaryQuestions();
         model.addAttribute("question", question);
         return "questions";
     }
 
     @GetMapping("/core")
     public String getCore1Questions(Model model) {
-        Question question = questionService.getQuestionFromCore1Questions(index++);
+        Question question = questionService.getQuestionFromCore1Questions();
         model.addAttribute("question", question);
         return "questions";
     }
 
     @GetMapping("/core2")
     public String getCore2Questions(Model model) {
-        Question question = questionService.getQuestionFromCore2Questions(index++);
+        Question question = questionService.getQuestionFromCore2Questions();
         model.addAttribute("question", question);
         return "questions";
     }
 
     @GetMapping("/core3")
     public String getCore3Questions(Model model) {
-        Question question = questionService.getQuestionFromCore3Questions(index++);
+        Question question = questionService.getQuestionFromCore3Questions();
         model.addAttribute("question", question);
         return "questions";
     }
@@ -66,17 +72,7 @@ public class QuestionController {
 
     @GetMapping("/patterns")
     public String getPatternsQuestions(Model model){
-        List<Question> patternsQuestions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.getTheme().equals(Theme.PATTERNS_ALGORITHMS)) {
-                patternsQuestions.add(question);
-            }
-        }
-//        int randomNumber = random.nextInt(1, patternsQuestions.size());
-        if (index >= patternsQuestions.size()) {
-            index = 0;
-        }
-        Question question = patternsQuestions.get(index++);
+        Question question = questionService.getPatthernsQuestion();
         model.addAttribute("question", question);
         return "questions";
     }

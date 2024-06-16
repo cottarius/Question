@@ -12,9 +12,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class QuestionService{
+public class QuestionService {
     private final QuestionRepository questionRepository;
-//    private int index = 0;
+    private int index = 32;
 
     public Optional<Question> findById(long id) {
         return questionRepository.findById(id);
@@ -28,44 +28,60 @@ public class QuestionService{
         return questionRepository.save(question);
     }
 
-    public Question getQuestionFromPrimaryQuestions(int index) {
+    public Question getPatthernsQuestion() {
+        List<Question> questions = getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
+        checkIndex(questions);
+        return questions.get(index);
+    }
+
+    public Question getQuestionFromSqlQuestions() {
+        List<Question> sqlQuestions = getQuestionsFromTheme(Theme.SQL_DATABASE);
+        checkIndex(sqlQuestions);
+        return sqlQuestions.get(index++);
+    }
+
+    public Question getQuestionFromPrimaryQuestions() {
         List<Question> primaryQuestions = new ArrayList<>();
         for (Question question : questionRepository.findAll()) {
             if (question.isImpotent()) {
                 primaryQuestions.add(question);
             }
         }
-        if (index >= primaryQuestions.size()) {
-            index = 0;
-        }
-        return primaryQuestions.get(index);
+        checkIndex(primaryQuestions);
+        return primaryQuestions.get(index++);
     }
 
-    public Question getQuestionFromCore3Questions(int index) {
-        List<Question> core3Questions = getQuestionsFromTheme(Theme.CORE3_MULTITHREADING, index);
-        return core3Questions.get(index);
+    public Question getQuestionFromCore3Questions() {
+        List<Question> core3Questions = getQuestionsFromTheme(Theme.CORE3_MULTITHREADING);
+        checkIndex(core3Questions);
+        return core3Questions.get(index++);
     }
 
-    public Question getQuestionFromCore2Questions(int index) {
-        List<Question> core2Questions = getQuestionsFromTheme(Theme.CORE2_COLLECTIONS, index);
-        return core2Questions.get(index);
+    public Question getQuestionFromCore2Questions() {
+        List<Question> core2Questions = getQuestionsFromTheme(Theme.CORE2_COLLECTIONS);
+        checkIndex(core2Questions);
+        return core2Questions.get(index++);
     }
 
-    public Question getQuestionFromCore1Questions(int index) {
-        List<Question> core1Questions = getQuestionsFromTheme(Theme.CORE1, index);
-        return core1Questions.get(index);
+    public Question getQuestionFromCore1Questions() {
+        List<Question> core1Questions = getQuestionsFromTheme(Theme.CORE1);
+        checkIndex(core1Questions);
+        return core1Questions.get(index++);
     }
 
-    public List<Question> getQuestionsFromTheme(Theme theme, int index) {
+    public List<Question> getQuestionsFromTheme(Theme theme) {
         List<Question> questions = new ArrayList<>();
         for (Question question : questionRepository.findAll()) {
             if (question.getTheme().equals(theme)) {
                 questions.add(question);
             }
         }
+        return questions;
+    }
+
+    public void checkIndex(List<Question> questions) {
         if (index >= questions.size()) {
             index = 0;
         }
-        return questions;
     }
 }
