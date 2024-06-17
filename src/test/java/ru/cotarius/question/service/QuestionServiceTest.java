@@ -53,13 +53,21 @@ public class QuestionServiceTest {
     }
 
     @Test
-    public void getSqlQuestionsShouldReturnSqlQuestions() {
-        List<Question> sqlQuestions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.getTheme() == Theme.SQL_DATABASE) {
-                sqlQuestions.add(question);
-            }
+    public void getHibernateQuestionsShouldReturnQuestionsFromHibernateQuestions() {
+        List<Question> hibernateQuestions = getQuestions(Theme.HIBERNATE_JDBC);
+
+        for (Question question : hibernateQuestions) {
+            assertThat(question.getTheme().equals(Theme.HIBERNATE_JDBC)).isTrue();
         }
+        assertThat(hibernateQuestions.size()).isEqualTo(1);
+        assertThat(hibernateQuestions).isNotNull();
+        assertThat(hibernateQuestions.get(0)).isEqualTo(hibernateQuestion);
+    }
+
+    @Test
+    public void getSqlQuestionsShouldReturnSqlQuestions() {
+        List<Question> sqlQuestions = getQuestions(Theme.SQL_DATABASE);
+
         for (Question question : sqlQuestions) {
             assertThat(question.getTheme().equals(Theme.SQL_DATABASE)).isTrue();
         }
@@ -70,12 +78,7 @@ public class QuestionServiceTest {
 
     @Test
     public void getCore3QuestionsShouldReturnCore3Questions() {
-        List<Question> core3Questions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.getTheme().equals(Theme.CORE3_MULTITHREADING)) {
-                core3Questions.add(question);
-            }
-        }
+        List<Question> core3Questions = getQuestions(Theme.CORE3_MULTITHREADING);
 
         for (Question question : core3Questions) {
             assertThat(question.getTheme().equals(Theme.CORE3_MULTITHREADING)).isTrue();
@@ -87,12 +90,7 @@ public class QuestionServiceTest {
     
     @Test
     public void getCore2QuestionsShouldReturnCore2Questions() {
-        List<Question> core2Questions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.getTheme().equals(Theme.CORE2_COLLECTIONS)){
-                core2Questions.add(question);
-            }
-        }
+        List<Question> core2Questions = getQuestions(Theme.CORE2_COLLECTIONS);
 
         for (Question question : core2Questions) {
             assertThat(question.getTheme().equals(Theme.CORE2_COLLECTIONS)).isTrue();
@@ -104,12 +102,7 @@ public class QuestionServiceTest {
 
     @Test
     public void getCore1QuestionsShouldReturnCore1Questions() {
-        List<Question> core1Questions = new ArrayList<>();
-        for (Question question : questionService.findAll()) {
-            if (question.getTheme().equals(Theme.CORE1)){
-                core1Questions.add(question);
-            }
-        }
+        List<Question> core1Questions = getQuestions(Theme.CORE1);
 
         for (Question question : core1Questions) {
             assertThat(question.getTheme().equals(Theme.CORE1)).isTrue();
@@ -151,5 +144,15 @@ public class QuestionServiceTest {
 
         assertThat(question.getId()).isEqualTo(core1Question.getId());
         assertThat(questionService).isNotNull();
+    }
+
+    private List<Question> getQuestions(Theme theme) {
+        List<Question> hibernateQuestions = new ArrayList<>();
+        for (Question question : questionService.findAll()) {
+            if (question.getTheme() == theme) {
+                hibernateQuestions.add(question);
+            }
+        }
+        return hibernateQuestions;
     }
 }

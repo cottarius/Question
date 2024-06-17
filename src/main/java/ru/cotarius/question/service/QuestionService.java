@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository questionRepository;
-    private int index = 32;
+    private int index = 0;
 
     public Optional<Question> findById(long id) {
         return questionRepository.findById(id);
@@ -28,10 +28,16 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    public Question getPatthernsQuestion() {
+    public Question getQuestionFromHibernateQuestions() {
+        List<Question> hibernateQuestions = getQuestionsFromTheme(Theme.HIBERNATE_JDBC);
+        checkIndex(hibernateQuestions);
+        return hibernateQuestions.get(index++);
+    }
+
+    public Question getQuestionFromPatternsQuestions() {
         List<Question> questions = getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
         checkIndex(questions);
-        return questions.get(index);
+        return questions.get(index++);
     }
 
     public Question getQuestionFromSqlQuestions() {

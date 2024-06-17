@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
       id: add-tag-1.0.0
-      author: cotarius"
+      author: cotarius
 
   - include:
-      file: "create-table-questions.yaml"
+      file: create-table-questions.yaml
       relativeToChangelogFile: true

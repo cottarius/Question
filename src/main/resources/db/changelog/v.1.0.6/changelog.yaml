@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: add-tag-1.0.3
+      id: add-tag-1.0.6
       author: cotarius
 
   - include:
-      file: insert-into-questions-core2.yaml
+      file: insert-into-questions-hibernate.yaml
       relativeToChangelogFile: true

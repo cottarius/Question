@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
       id: add-tag-1.0.4
-      author: cotarius"
+      author: cotarius
 
   - include:
-      file: "insert-into-questions-core3.yaml"
+      file: insert-into-questions-core3.yaml
       relativeToChangelogFile: true

@@ -5,11 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.cotarius.question.entity.Question;
-import ru.cotarius.question.entity.Theme;
 import ru.cotarius.question.service.QuestionService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -26,6 +23,13 @@ public class QuestionController {
 //        index++;
 //        return "redirect:/primary";
 //    }
+
+    @GetMapping("/hibernate")
+    public String getHibernateQuestion(Model model) {
+        Question question = questionService.getQuestionFromHibernateQuestions();
+        model.addAttribute("question", question);
+        return "questions";
+    }
 
     @GetMapping("/sql")
     public String getSqlQuestion(Model model) {
@@ -72,7 +76,7 @@ public class QuestionController {
 
     @GetMapping("/patterns")
     public String getPatternsQuestions(Model model){
-        Question question = questionService.getPatthernsQuestion();
+        Question question = questionService.getQuestionFromPatternsQuestions();
         model.addAttribute("question", question);
         return "questions";
     }
