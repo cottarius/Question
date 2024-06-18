@@ -34,46 +34,66 @@ public class QuestionService {
         return hibernateQuestions.get(index++);
     }
 
-    public Question getQuestionFromPatternsQuestions() {
-        List<Question> questions = getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
-        checkIndex(questions);
-        return questions.get(index++);
+    public List<Question> getPatternsQuestions() {
+        return getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
     }
 
-    public Question getQuestionFromSqlQuestions() {
-        List<Question> sqlQuestions = getQuestionsFromTheme(Theme.SQL_DATABASE);
-        checkIndex(sqlQuestions);
-        return sqlQuestions.get(index++);
+//    public Question getQuestionFromPatternsQuestions() {
+//        List<Question> questions = getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
+//        checkIndex(questions);
+//        return questions.get(index++);
+//    }
+
+//    public Question getQuestionFromSqlQuestions() {
+//        List<Question> sqlQuestions = getQuestionsFromTheme(Theme.SQL_DATABASE);
+//        checkIndex(sqlQuestions);
+//        return sqlQuestions.get(index++);
+//    }
+
+    public List<Question> getSqlQuestions() {
+        return getQuestionsFromTheme(Theme.SQL_DATABASE);
     }
 
-    public Question getQuestionFromPrimaryQuestions() {
+//    public Question getQuestionFromPrimaryQuestions() {
+//        List<Question> primaryQuestions = new ArrayList<>();
+//        for (Question question : questionRepository.findAll()) {
+//            if (question.isImpotent()) {
+//                primaryQuestions.add(question);
+//            }
+//        }
+//        checkIndex(primaryQuestions);
+//        return primaryQuestions.get(index++);
+//    }
+
+    public List<Question> getPrimaryQuestions() {
         List<Question> primaryQuestions = new ArrayList<>();
         for (Question question : questionRepository.findAll()) {
             if (question.isImpotent()) {
                 primaryQuestions.add(question);
             }
         }
-        checkIndex(primaryQuestions);
-        return primaryQuestions.get(index++);
+        return primaryQuestions;
     }
 
-    public Question getQuestionFromCore3Questions() {
-        List<Question> core3Questions = getQuestionsFromTheme(Theme.CORE3_MULTITHREADING);
-        checkIndex(core3Questions);
-        return core3Questions.get(index++);
-    }
+//    public Question getQuestionFromCore3Questions() {
+//        List<Question> core3Questions = getQuestionsFromTheme(Theme.CORE3_MULTITHREADING);
+//        checkIndex(core3Questions);
+//        return core3Questions.get(index++);
+//    }
 
-    public Question getQuestionFromCore2Questions() {
-        List<Question> core2Questions = getQuestionsFromTheme(Theme.CORE2_COLLECTIONS);
-        checkIndex(core2Questions);
-        return core2Questions.get(index++);
-    }
 
-    public Question getQuestionFromCore1Questions() {
-        List<Question> core1Questions = getQuestionsFromTheme(Theme.CORE1);
-        checkIndex(core1Questions);
-        return core1Questions.get(index++);
-    }
+
+//    public Question getQuestionFromCore2Questions() {
+//        List<Question> core2Questions = getQuestionsFromTheme(Theme.CORE2_COLLECTIONS);
+//        checkIndex(core2Questions);
+//        return core2Questions.get(index++);
+//    }
+//
+//    public Question getQuestionFromCore1Questions() {
+//        List<Question> core1Questions = getQuestionsFromTheme(Theme.CORE1);
+//        checkIndex(core1Questions);
+//        return core1Questions.get(index++);
+//    }
 
     public List<Question> getQuestionsFromTheme(Theme theme) {
         List<Question> questions = new ArrayList<>();
@@ -89,5 +109,25 @@ public class QuestionService {
         if (index >= questions.size()) {
             index = 0;
         }
+    }
+
+    public List<Question> getHibernateQuestions() {
+        return getQuestionsFromTheme(Theme.HIBERNATE_JDBC);
+    }
+
+    public List<Question> getCore1Questions() {
+        return getQuestionsFromTheme(Theme.CORE1);
+    }
+
+    public List<Question> getCore2Questions() {
+        return getQuestionsFromTheme(Theme.CORE2_COLLECTIONS);
+    }
+
+    public List<Question> getCore3Questions() {
+        return getQuestionsFromTheme(Theme.CORE3_MULTITHREADING);
+    }
+
+    public List<Question> getFashionQuestions() {
+        return getQuestionsFromTheme(Theme.FASHION_TECHNOLOGIES);
     }
 }

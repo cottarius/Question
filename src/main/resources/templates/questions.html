@@ -8,6 +8,9 @@
 <body>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">
+        <img src="java-logo.jpg" alt="Logo" style="width:40px;">
+    </a>
     <!-- Brand -->
     <a class="navbar-brand" >Java Quizzer</a>
 
@@ -55,9 +58,25 @@
     </div>
 </nav>
 
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <form class="form-inline" method="post" action="/search">
+        <label>
+            <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search">
+        </label>
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+</nav>
+
+<form method="post" action="/search">
+    <label>
+        <input type="text" name="query" />
+    </label>
+    <button type="submit">Search</button>
+</form>
+
 <div class="container mt-3">
     <h1>
-        <div th:text="${question.getQuestion()}"></div>
+        <div th:text="${questions.get(index).getQuestion()}"></div>
     </h1>
     <br>
     <br>
@@ -65,7 +84,7 @@
     <br><br>
     <h5>
         <div id="answer" style="display: none;"><span
-                th:utext="${#strings.replace(question.getAnswer(), '\n', '<br>')}"></span>
+                th:utext="${#strings.replace(questions.get(index).getAnswer(), '\n', '<br>')}"></span>
         </div>
     </h5>
 
