@@ -4,9 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.cotarius.question.entity.Question;
 import ru.cotarius.question.service.QuestionService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -84,5 +88,24 @@ public class QuestionController {
     @GetMapping("/index")
     public String getIndex(Model model){
         return "index";
+    }
+
+    @PostMapping("/search")
+    public String searchQuestions(@RequestParam() String query, Model model) {
+        List<Question> questions = questionService.findAll();
+        Question findedQuestion = null;
+        String message = "No results found";
+        for (Question question : questions) {
+            if (question.getQuestion().toLowerCase().contains(query.toLowerCase())) {
+                findedQuestion = question;
+                break;
+            }
+        }
+        if (findedQuestion != null) {
+            model.addAttribute("question", findedQuestion);
+        } else {
+            model.addAttribute("message", message);
+        }
+        return "filtered-question";
     }
 }

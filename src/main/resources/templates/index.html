@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thymeleaf Страница</title>
+    <title>Java Quizzer</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -46,16 +46,25 @@
                 <a class="nav-link" th:href="@{/hibernate}">Hibernate / JDBC</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/spring}">Spring</a>
+                <a class="nav-link" th:href="@{/index}">Spring</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/patterns}">Algorithms / Patterns</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/technologies}">Fashion technologies</a>
+                <a class="nav-link" th:href="@{/index}">Fashion technologies</a>
             </li>
         </ul>
     </div>
+</nav>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <form class="form-inline" method="post" action="/search">
+        <label>
+            <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search question">
+        </label>
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
 </nav>
 
 <div class="container mt-3">

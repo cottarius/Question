@@ -12,7 +12,7 @@
         <img src="java-logo.jpg" alt="Logo" style="width:40px;">
     </a>
     <!-- Brand -->
-    <a class="navbar-brand" >Java Quizzer</a>
+    <a class="navbar-brand">Java Quizzer</a>
 
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -75,29 +75,33 @@
 <!--</form>-->
 
 <div class="container mt-3">
+    <li th:if="${question}">
+        <h5>
+            <div class="font-italic" th:text="${question.getTheme()}"></div>
+        </h5>
+        <h1>
+            <div th:text="${question.getQuestion()}"></div>
+        </h1>
+        <br>
+        <br>
+        <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
+        <br><br>
+        <h5>
+            <div id="answer" style="display: none;"><span
+                    th:utext="${#strings.replace(question.getAnswer(), '\n', '<br>')}"></span>
+            </div>
+        </h5>
+    </li>
     <h5>
-        <div class="font-italic" th:text="${question.getTheme()}"></div>
+        <p th:if="${message}" th:text="${message}"></p>
     </h5>
-    <h1>
-        <div th:text="${question.getQuestion()}"></div>
-    </h1>
-    <br>
-    <br>
-    <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
-    <br><br>
-    <h5>
-        <div id="answer" style="display: none;"><span
-                th:utext="${#strings.replace(question.getAnswer(), '\n', '<br>')}"></span>
-        </div>
-    </h5>
-
     <br><br>
 
-<!--    <a th:href="@{/next-question}" class="btn btn-success">Next Question</a>-->
-    <button onclick="reloadPage()" class="btn btn-success">Следующий вопрос</button>
+    <a th:href="@{/index}" class="btn btn-success">Main page</a>
+    <!--    <button onclick="" class="btn btn-success">На главную</button>-->
 
     <br><br>
-<!--    <a th:href="@{/index}">Вернуться на главную страницу</a>-->
+    <!--    <a th:href="@{/index}">Вернуться на главную страницу</a>-->
 </div>
 <script>
     function showAnswer() {
