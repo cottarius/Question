@@ -2,17 +2,17 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thymeleaf Страница</title>
+    <title>Title</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
     <a class="navbar-brand" href="#">
         <img src="/java-logo.jpg" alt="Logo" style="width:40px;">
     </a>
-    <a class="navbar-brand" >Java Quizzer</a>
+    <!-- Brand -->
+    <a class="navbar-brand">Java Quizzer</a>
 
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -68,47 +68,51 @@
 </nav>
 
 <div class="container mt-3">
+    <h5>
+        <div th:text="${questions.get(random).getTheme()()}"></div>
+    </h5>
     <h1>
-        <p class="font-italic">Welcome to Java Quizzer!</p>
+        <div th:text="${questions.get(random).getQuestion()}"></div>
     </h1>
     <br>
-    <h2>
-        <p class="font-weight-bold">List of Topics</p>
-    </h2>
     <br>
-    <h4>
-        <p class="font-weight-normal">All Questions</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">Primary Questions</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">JavaCore</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">JavaCore / Collections</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">JavaCore / Multithreading</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">SQL / Database</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">Hibernate / JDBC</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">Patterns</p>
-    </h4>
+    <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
+    <br><br>
+    <h5>
+        <div id="answer" style="display: none;"><span
+                th:utext="${#strings.replace(questions.get(random).getAnswer(), '\n', '<br>')}"></span>
+        </div>
+    </h5>
 
-<!--    <a th:href="@{/all}" class="btn btn-primary">All Questions</a>-->
-<!--    <a th:href="@{/primary}" class="btn btn-warning">Primary questions</a>-->
-<!--    <a th:href="@{/core}" class="btn btn-primary">Java Core</a>-->
-<!--    <a th:href="@{/patterns}" class="btn btn-primary">Patterns and Algorithms</a>-->
+    <br><br>
+
+
+    <div class="row">
+        <div class="col-6" th:if="${currentIndex > 0}">
+            <a th:href="@{/all/{id}(id=${currentIndex - 1})}" class="btn btn-primary mr-2">Предыдущий вопрос</a>
+        </div>
+        <div class="col-6" th:if="${currentIndex < questions.size() - 1}">
+            <a th:href="@{/all/{id}(id=${currentIndex + 1})}" class="btn btn-warning">Следующий вопрос</a>
+        </div>
+    </div>
+
+
+    <!--    <a th:href="" class="btn btn-success">Next Question</a>-->
+    <!--    <a th:href="@{/previous-question}" class="btn btn-success">Previous Question</a>-->
+    <!--    <button onclick="reloadPage()" class="btn btn-success">Следующий вопрос</button>-->
+
+    <br><br>
+    <!--    <a th:href="@{/currentIndex}">Вернуться на главную страницу</a>-->
 </div>
+<script>
+    function showAnswer() {
+        document.getElementById("answer").style.display = "block";
+    }
 
-<!--<button onclick="window.location.href='/patterns'">Алгоритмы и Паттерны</button>-->
-<!--<button onclick="window.location.href='/question'">Все вопросы</button>-->
+    function reloadPage() {
+        location.reload();
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>

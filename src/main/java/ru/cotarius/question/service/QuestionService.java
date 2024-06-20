@@ -1,5 +1,6 @@
 package ru.cotarius.question.service;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.cotarius.question.entity.Question;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Data
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private int index = 0;
@@ -41,13 +43,13 @@ public class QuestionService {
 //    public Question getQuestionFromPatternsQuestions() {
 //        List<Question> questions = getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
 //        checkIndex(questions);
-//        return questions.get(index++);
+//        return questions.get(currentIndex++);
 //    }
 
 //    public Question getQuestionFromSqlQuestions() {
 //        List<Question> sqlQuestions = getQuestionsFromTheme(Theme.SQL_DATABASE);
 //        checkIndex(sqlQuestions);
-//        return sqlQuestions.get(index++);
+//        return sqlQuestions.get(currentIndex++);
 //    }
 
     public List<Question> getSqlQuestions() {
@@ -62,7 +64,7 @@ public class QuestionService {
 //            }
 //        }
 //        checkIndex(primaryQuestions);
-//        return primaryQuestions.get(index++);
+//        return primaryQuestions.get(currentIndex++);
 //    }
 
     public List<Question> getPrimaryQuestions() {
@@ -78,7 +80,7 @@ public class QuestionService {
 //    public Question getQuestionFromCore3Questions() {
 //        List<Question> core3Questions = getQuestionsFromTheme(Theme.CORE3_MULTITHREADING);
 //        checkIndex(core3Questions);
-//        return core3Questions.get(index++);
+//        return core3Questions.get(currentIndex++);
 //    }
 
 
@@ -86,13 +88,13 @@ public class QuestionService {
 //    public Question getQuestionFromCore2Questions() {
 //        List<Question> core2Questions = getQuestionsFromTheme(Theme.CORE2_COLLECTIONS);
 //        checkIndex(core2Questions);
-//        return core2Questions.get(index++);
+//        return core2Questions.get(currentIndex++);
 //    }
 //
 //    public Question getQuestionFromCore1Questions() {
 //        List<Question> core1Questions = getQuestionsFromTheme(Theme.CORE1);
 //        checkIndex(core1Questions);
-//        return core1Questions.get(index++);
+//        return core1Questions.get(currentIndex++);
 //    }
 
     public List<Question> getQuestionsFromTheme(Theme theme) {

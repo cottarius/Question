@@ -4,15 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.cotarius.question.entity.Question;
 import ru.cotarius.question.entity.Theme;
 import ru.cotarius.question.service.QuestionService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 @Controller
@@ -20,12 +19,11 @@ import java.util.Random;
 public class QuestionController {
     private final QuestionService questionService;
     private final Random random = new Random();
-    private int index = 0;
 
 
 //    @GetMapping("/next-question")
 //    public String getNextQuestion() {
-//        index++;
+//        currentIndex;
 //        return "redirect:/primary";
 //    }
 
@@ -33,107 +31,117 @@ public class QuestionController {
 //    public String temp(Model model) {
 //        List<Question> hibernateQuestions = questionService.getHibernateQuestions();
 //        checkIndex(hibernateQuestions);
-//        model.addAttribute("index", index++);
+//        model.addAttribute("currentIndex", currentIndex);
 //        model.addAttribute("hibernateQuestions", hibernateQuestions);
 //
 //        return "temp";
 //    }
 
     private void checkIndex(List<Question> questions) {
-        if (index >= questions.size()) {
-            index = 0;
+        if (questionService.getIndex() >= questions.size() || questionService.getIndex() < 0) {
+            questionService.setIndex(0);
         }
     }
 
-    @GetMapping("/hibernate")
-    public String getHibernateQuestions(Model model) {
+    @GetMapping("/hibernate/{currentIndex}")
+    public String getHibernateQuestions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.HIBERNATE_JDBC);
         checkIndex(questions);
         model.addAttribute("questions", questions);
-        model.addAttribute("index", index++);
-        return "questions";
+        model.addAttribute("currentIndex", currentIndex);
+        return "hibernate";
     }
 
-    @GetMapping("/sql")
-    public String getSqlQuestion(Model model) {
+    @GetMapping("/sql/{currentIndex}")
+    public String getSqlQuestion(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.SQL_DATABASE);
         checkIndex(questions);
         model.addAttribute("questions", questions);
-        model.addAttribute("index", index++);
-        return "questions";
+        model.addAttribute("currentIndex", currentIndex);
+        return "sql";
     }
 
-    @GetMapping("/primary")
-    public String getPrimaryQuestions(Model model) {
+    @GetMapping("/primary/{currentIndex}")
+    public String getPrimaryQuestions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getPrimaryQuestions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
-        model.addAttribute("index", index++);
-        return "questions";
+        model.addAttribute("currentIndex", currentIndex);
+        return "primary";
     }
 
-    @GetMapping("/core")
-    public String getCore1Questions(Model model) {
+    @GetMapping("/core/{currentIndex}")
+    public String getCore1Questions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.CORE1);
         checkIndex(questions);
         model.addAttribute("questions", questions);
-        model.addAttribute("index", index++);
-        return "questions";
+        model.addAttribute("currentIndex", currentIndex);
+        return "core1";
     }
 
-    @GetMapping("/core2")
-    public String getCore2Questions(Model model) {
+    @GetMapping("/core2/{currentIndex}")
+    public String getCore2Questions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.CORE2_COLLECTIONS);
         checkIndex(questions);
         model.addAttribute("questions", questions);
-        model.addAttribute("index", index++);
-        return "questions";
+        model.addAttribute("currentIndex", currentIndex);
+        return "core2";
     }
 
-    @GetMapping("/core3")
-    public String getCore3Questions(Model model) {
+    @GetMapping("/core3/{currentIndex}")
+    public String getCore3Questions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.CORE3_MULTITHREADING);
         checkIndex(questions);
         model.addAttribute("questions", questions);
-        model.addAttribute("index", index++);
-        return "questions";
+        model.addAttribute("currentIndex", currentIndex);
+        return "core3";
     }
 
-    @GetMapping("/all")
-    public String getRandomQuestion(Model model){
-        index = random.nextInt(0, questionService.findAll().size());
+    @GetMapping("/all/{currentIndex}")
+    public String getRandomQuestion(@PathVariable int currentIndex, Model model){
+        int randomIndex = random.nextInt(0, questionService.findAll().size());
         List<Question> questions = questionService.findAll();
         checkIndex(questions);
 //        Question question = questionService.findById(randomIndex).orElseThrow(NoSuchElementException::new);
-        model.addAttribute("questions", index++);
-        return "questions";
+        model.addAttribute("random", randomIndex);
+        model.addAttribute("questions", questions);
+        model.addAttribute("currentIndex", currentIndex);
+        return "all";
     }
 
-    @GetMapping("/patterns")
-    public String getPatternsQuestions(Model model){
+    @GetMapping("/patterns/{currentIndex}")
+    public String getPatternsQuestions(@PathVariable int currentIndex, Model model){
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
         checkIndex(questions);
         model.addAttribute("questions", questions);
-        model.addAttribute("index", index++);
-        return "questions";
+        model.addAttribute("currentIndex", currentIndex);
+        return "patterns";
     }
 
     @PostMapping("/search")
     public String searchQuestions(@RequestParam() String query, Model model) {
         List<Question> questions = questionService.findAll();
-        List<Question> filteredQuestions = new ArrayList<>();
+        Question findedQuestion = null;
+        String message = "No results found";
         for (Question question : questions) {
             if (question.getQuestion().toLowerCase().contains(query.toLowerCase())) {
-//                filteredQuestions.add(question);
-                model.addAttribute("question", question);
+                findedQuestion = question;
                 break;
             }
         }
-        return "questions";
+        if (findedQuestion != null) {
+            model.addAttribute("question", findedQuestion);
+            model.addAttribute("currentIndex", questionService.getIndex());
+        } else {
+            model.addAttribute("message", message);
+            model.addAttribute("currentIndex", questionService.getIndex());
+        }
+        return "filtered-question";
     }
 
-    @GetMapping("/index")
+    @GetMapping(value = {"/", "/index"})
     public String getIndex(Model model){
+        model.addAttribute("currentIndex", questionService.getIndex());
         return "index";
     }
 }
