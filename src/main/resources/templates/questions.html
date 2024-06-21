@@ -12,7 +12,7 @@
         <img src="/java-logo.jpg" alt="Logo" style="width:40px;">
     </a>
     <!-- Brand -->
-    <a class="navbar-brand" >Java Quizzer</a>
+    <a class="navbar-brand">Java Quizzer</a>
 
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -25,34 +25,34 @@
                 <a class="nav-link" th:href="@{/index}">Main Page</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/all}">All Questions</a>
+                <a class="nav-link" th:href="@{/all/{id}(id=${currentIndex})}">All Questions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/primary}">Primary Questions</a>
+                <a class="nav-link" th:href="@{/primary/{id}(id=${currentIndex})}">Primary Questions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/core}">JavaCore</a>
+                <a class="nav-link" th:href="@{/core1/{id}(id=${currentIndex})}">JavaCore</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/core2}">JavaCore / Collections</a>
+                <a class="nav-link" th:href="@{/core2/{id}(id=${currentIndex})}">JavaCore / Collections</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/core3}">JavaCore / Multithreading</a>
+                <a class="nav-link" th:href="@{/core3/{id}(id=${currentIndex})}">JavaCore / Multithreading</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/sql}">SQL / Database</a>
+                <a class="nav-link" th:href="@{/sql/{id}(id=${currentIndex})}">SQL / Database</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/hibernate}">Hibernate / JDBC</a>
+                <a class="nav-link" th:href="@{/hibernate/{id}(id=${currentIndex})}">Hibernate / JDBC</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/spring}">Spring</a>
+                <a class="nav-link" th:href="@{/index}">Spring</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/patterns}">Algorithms / Patterns</a>
+                <a class="nav-link" th:href="@{/patterns/{id}(id=${currentIndex})}">Algorithms / Patterns</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/technologies}">Fashion technologies</a>
+                <a class="nav-link" th:href="@{/index}">Fashion technologies</a>
             </li>
         </ul>
     </div>
@@ -67,16 +67,13 @@
     </form>
 </nav>
 
-<form method="post" action="/search">
-    <label>
-        <input type="text" name="query" />
-    </label>
-    <button type="submit">Search</button>
-</form>
 
 <div class="container mt-3">
+    <h5>
+        <div class="font-italic" th:text="${questions.get(currentIndex).getTheme()}"></div>
+    </h5>
     <h1>
-        <div th:text="${questions.get(index).getQuestion()}"></div>
+        <div th:text="${questions.get(currentIndex).getQuestion()}"></div>
     </h1>
     <br>
     <br>
@@ -84,7 +81,7 @@
     <br><br>
     <h5>
         <div id="answer" style="display: none;"><span
-                th:utext="${#strings.replace(questions.get(index).getAnswer(), '\n', '<br>')}"></span>
+                th:utext="${#strings.replace(questions.get(currentIndex).getAnswer(), '\n', '<br>')}"></span>
         </div>
     </h5>
 
@@ -94,12 +91,52 @@
 
     </div>
 
-    <a th:href="" class="btn btn-success">Next Question</a>
-    <a th:href="@{/previous-question}" class="btn btn-success">Previous Question</a>
-<!--    <button onclick="reloadPage()" class="btn btn-success">Следующий вопрос</button>-->
+    <!--    <a th:href="" class="btn btn-success">Next Question</a>-->
+    <!--    <a th:href="@{/previous-question}" class="btn btn-success">Previous Question</a>-->
+    <!--    <button onclick="reloadPage()" class="btn btn-success">Следующий вопрос</button>-->
 
     <br><br>
-<!--    <a th:href="@{/currentIndex}">Вернуться на главную страницу</a>-->
+
+    <div th:switch="${questions.get(currentIndex).getTheme().toString()}">
+        <div th:case="'CORE1'">
+            <a th:if="${currentIndex > 0}" th:href="@{/core1/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+                вопрос</a>
+            <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/core1/{id}(id=${currentIndex + 1})}"
+               class="btn btn-warning">Следующий вопрос</a>
+        </div>
+        <div th:case="'CORE2_COLLECTIONS'">
+            <a th:if="${currentIndex > 0}" th:href="@{/core2/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+                вопрос</a>
+            <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/core2/{id}(id=${currentIndex + 1})}"
+               class="btn btn-warning">Следующий вопрос</a>
+        </div>
+        <div th:case="'CORE3_MULTITHREADING'">
+            <a th:if="${currentIndex > 0}" th:href="@{/core3/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+                вопрос</a>
+            <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/core3/{id}(id=${currentIndex + 1})}"
+               class="btn btn-warning">Следующий вопрос</a>
+        </div>
+        <div th:case="'SQL_DATABASE'">
+            <a th:if="${currentIndex > 0}" th:href="@{/sql/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+                вопрос</a>
+            <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/sql/{id}(id=${currentIndex + 1})}"
+               class="btn btn-warning">Следующий вопрос</a>
+        </div>
+        <div th:case="'HIBERNATE_JDBC'">
+            <a th:if="${currentIndex > 0}" th:href="@{/hibernate/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+                вопрос</a>
+            <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/hibernate/{id}(id=${currentIndex + 1})}"
+               class="btn btn-warning">Следующий вопрос</a>
+        </div>
+        <div th:case="'PATTERNS_ALGORITHMS'">
+            <a th:if="${currentIndex > 0}" th:href="@{/patterns/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+                вопрос</a>
+            <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/patterns/{id}(id=${currentIndex + 1})}"
+               class="btn btn-warning">Следующий вопрос</a>
+        </div>
+    </div>
+
+    <!--    <a th:href="@{/currentIndex}">Вернуться на главную страницу</a>-->
 </div>
 <script>
     function showAnswer() {

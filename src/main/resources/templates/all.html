@@ -31,7 +31,7 @@
                 <a class="nav-link" th:href="@{/primary/{id}(id=${currentIndex})}">Primary Questions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/core/{id}(id=${currentIndex})}">JavaCore</a>
+                <a class="nav-link" th:href="@{/core1/{id}(id=${currentIndex})}">JavaCore</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/core2/{id}(id=${currentIndex})}">JavaCore / Collections</a>
@@ -69,7 +69,7 @@
 
 <div class="container mt-3">
     <h5>
-        <div th:text="${questions.get(random).getTheme()()}"></div>
+        <div th:text="${questions.get(random).getTheme()}"></div>
     </h5>
     <h1>
         <div th:text="${questions.get(random).getQuestion()}"></div>
@@ -86,15 +86,18 @@
 
     <br><br>
 
+    <a th:if="${random > 0}" th:href="@{/all/{id}(id=${random - 1})}" class="btn btn-primary">Предыдущий вопрос</a>
+    <a th:if="${random < questions.size() - 1}" th:href="@{/all/{id}(id=${random + 1})}" class="btn btn-warning">Следующий
+        вопрос</a>
 
-    <div class="row">
-        <div class="col-6" th:if="${currentIndex > 0}">
-            <a th:href="@{/all/{id}(id=${currentIndex - 1})}" class="btn btn-primary mr-2">Предыдущий вопрос</a>
-        </div>
-        <div class="col-6" th:if="${currentIndex < questions.size() - 1}">
-            <a th:href="@{/all/{id}(id=${currentIndex + 1})}" class="btn btn-warning">Следующий вопрос</a>
-        </div>
-    </div>
+    <!--    <div class="row">-->
+    <!--        <div class="col-6" th:if="${currentIndex > 0}">-->
+    <!--            <a th:href="@{/all/{id}(id=${currentIndex - 1})}" class="btn btn-primary mr-2">Предыдущий вопрос</a>-->
+    <!--        </div>-->
+    <!--        <div class="col-6" th:if="${currentIndex < questions.size() - 1}">-->
+    <!--            <a th:href="@{/all/{id}(id=${currentIndex + 1})}" class="btn btn-warning">Следующий вопрос</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
 
     <!--    <a th:href="" class="btn btn-success">Next Question</a>-->

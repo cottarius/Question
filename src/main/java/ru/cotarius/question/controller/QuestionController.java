@@ -49,7 +49,7 @@ public class QuestionController {
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "hibernate";
+        return "questions";
     }
 
     @GetMapping("/sql/{currentIndex}")
@@ -58,7 +58,7 @@ public class QuestionController {
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "sql";
+        return "questions";
     }
 
     @GetMapping("/primary/{currentIndex}")
@@ -67,16 +67,16 @@ public class QuestionController {
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "primary";
+        return "questions";
     }
 
-    @GetMapping("/core/{currentIndex}")
+    @GetMapping("/core1/{currentIndex}")
     public String getCore1Questions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.CORE1);
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "core1";
+        return "questions";
     }
 
     @GetMapping("/core2/{currentIndex}")
@@ -85,7 +85,7 @@ public class QuestionController {
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "core2";
+        return "questions";
     }
 
     @GetMapping("/core3/{currentIndex}")
@@ -94,18 +94,18 @@ public class QuestionController {
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "core3";
+        return "questions";
     }
 
     @GetMapping("/all/{currentIndex}")
-    public String getRandomQuestion(@PathVariable int currentIndex, Model model){
-        int randomIndex = random.nextInt(0, questionService.findAll().size());
+    public String getAllQuestions(@PathVariable int currentIndex, Model model){
         List<Question> questions = questionService.findAll();
+        int randomIndex = random.nextInt(0, questions.size());
         checkIndex(questions);
 //        Question question = questionService.findById(randomIndex).orElseThrow(NoSuchElementException::new);
         model.addAttribute("random", randomIndex);
         model.addAttribute("questions", questions);
-        model.addAttribute("currentIndex", currentIndex);
+//        model.addAttribute("currentIndex", currentIndex);
         return "all";
     }
 
@@ -115,7 +115,7 @@ public class QuestionController {
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "patterns";
+        return "questions";
     }
 
     @PostMapping("/search")
