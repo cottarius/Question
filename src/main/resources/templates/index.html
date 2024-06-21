@@ -2,8 +2,9 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thymeleaf Страница</title>
+    <title>Java Quizzer</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/java-logo.jpg" type="image/x-icon"/>
 </head>
 <body>
 
@@ -77,38 +78,37 @@
     </h2>
     <br>
     <h4>
-        <p class="font-weight-normal">All Questions</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">Primary Questions</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">JavaCore</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">JavaCore / Collections</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">JavaCore / Multithreading</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">SQL / Database</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">Hibernate / JDBC</p>
-    </h4>
-    <h4>
-        <p class="font-weight-normal">Patterns</p>
-    </h4>
+        <p class="font-weight-normal">All Questions - <small>список всех вопросов. Каждый вопрос выводится в произвольном порядке</small></p>
 
-    <!--    <a th:href="@{/all}" class="btn btn-primary">All Questions</a>-->
-    <!--    <a th:href="@{/primary}" class="btn btn-warning">Primary questions</a>-->
-    <!--    <a th:href="@{/core}" class="btn btn-primary">Java Core</a>-->
-    <!--    <a th:href="@{/patterns}" class="btn btn-primary">Patterns and Algorithms</a>-->
+    </h4>
+    <h4>
+        <p class="font-weight-normal">Primary Questions - <small>главные вопросы, ответы на которых не знать нельзя:)</small></p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">JavaCore - <small>блок Java Core.</small> </p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">JavaCore / Collections - <small>продолжение блока Java Core. Включаетс в себя коллекции, лямбда-выражения, stream-api</small></p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">JavaCore / Multithreading - <small>продолжение блока Java Core. Включаетс в себя многопоточность</small></p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">SQL / Database - <small>блок по Sql-вопросам</small></p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">Hibernate / JDBC - <small>блок по Hibernate-вопросам</small></p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">Spring - <small>блок по Spring-вопросам</small></p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">Patterns - <small>блок вопросов по Алгоритмам и Паттернам проектирования</small></p>
+    </h4>
+    <h4>
+        <p class="font-weight-normal">Fashion Technologies - <small>включает в себя вопросы по: Kafka, RabbitMQ, Spring Cloud, Keycloak, Liquibase</small></p>
+    </h4>
 </div>
-
-<!--<button onclick="window.location.href='/patterns'">Алгоритмы и Паттерны</button>-->
-<!--<button onclick="window.location.href='/question'">Все вопросы</button>-->
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>

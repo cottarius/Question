@@ -2,8 +2,9 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Java Quizzer</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/java-logo.jpg" type="image/x-icon"/>
 </head>
 <body>
 
@@ -90,22 +91,8 @@
     <a th:if="${random < questions.size() - 1}" th:href="@{/all/{id}(id=${random + 1})}" class="btn btn-warning">Следующий
         вопрос</a>
 
-    <!--    <div class="row">-->
-    <!--        <div class="col-6" th:if="${currentIndex > 0}">-->
-    <!--            <a th:href="@{/all/{id}(id=${currentIndex - 1})}" class="btn btn-primary mr-2">Предыдущий вопрос</a>-->
-    <!--        </div>-->
-    <!--        <div class="col-6" th:if="${currentIndex < questions.size() - 1}">-->
-    <!--            <a th:href="@{/all/{id}(id=${currentIndex + 1})}" class="btn btn-warning">Следующий вопрос</a>-->
-    <!--        </div>-->
-    <!--    </div>-->
-
-
-    <!--    <a th:href="" class="btn btn-success">Next Question</a>-->
-    <!--    <a th:href="@{/previous-question}" class="btn btn-success">Previous Question</a>-->
-    <!--    <button onclick="reloadPage()" class="btn btn-success">Следующий вопрос</button>-->
-
     <br><br>
-    <!--    <a th:href="@{/currentIndex}">Вернуться на главную страницу</a>-->
+
 </div>
 <script>
     function showAnswer() {

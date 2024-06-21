@@ -20,23 +20,6 @@ public class QuestionController {
     private final QuestionService questionService;
     private final Random random = new Random();
 
-
-//    @GetMapping("/next-question")
-//    public String getNextQuestion() {
-//        currentIndex;
-//        return "redirect:/primary";
-//    }
-
-//    @GetMapping("/temp")
-//    public String temp(Model model) {
-//        List<Question> hibernateQuestions = questionService.getHibernateQuestions();
-//        checkIndex(hibernateQuestions);
-//        model.addAttribute("currentIndex", currentIndex);
-//        model.addAttribute("hibernateQuestions", hibernateQuestions);
-//
-//        return "temp";
-//    }
-
     private void checkIndex(List<Question> questions) {
         if (questionService.getIndex() >= questions.size() || questionService.getIndex() < 0) {
             questionService.setIndex(0);
@@ -102,10 +85,8 @@ public class QuestionController {
         List<Question> questions = questionService.findAll();
         int randomIndex = random.nextInt(0, questions.size());
         checkIndex(questions);
-//        Question question = questionService.findById(randomIndex).orElseThrow(NoSuchElementException::new);
         model.addAttribute("random", randomIndex);
         model.addAttribute("questions", questions);
-//        model.addAttribute("currentIndex", currentIndex);
         return "all";
     }
 
