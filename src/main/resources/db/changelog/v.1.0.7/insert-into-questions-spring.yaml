@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-questions-spring
+      author: cotarius
+
+  - include:
+      file: /sql/insert-into-questions-spring.sql

@@ -53,7 +53,19 @@ public class QuestionServiceTest {
     }
 
     @Test
-    public void getHibernateQuestionsShouldReturnQuestionsFromHibernateQuestions() {
+    public void getSpringQuestionsShouldReturnSpringQuestions() {
+        List<Question> springQuestions = getQuestions(Theme.SPRING);
+
+        for (Question question : springQuestions) {
+            assertThat(question.getTheme().equals(Theme.SPRING)).isTrue();
+        }
+        assertThat(springQuestions.size()).isEqualTo(1);
+        assertThat(springQuestions).isNotNull();
+        assertThat(springQuestions.get(0)).isEqualTo(springQuestion);
+    }
+
+    @Test
+    public void getHibernateQuestionsShouldReturnHibernateQuestions() {
         List<Question> hibernateQuestions = getQuestions(Theme.HIBERNATE_JDBC);
 
         for (Question question : hibernateQuestions) {

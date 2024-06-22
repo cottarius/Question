@@ -49,7 +49,7 @@
                 <a class="nav-link" th:href="@{/hibernate/{id}(id=${currentIndex})}">Hibernate / JDBC</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/index}">Spring</a>
+                <a class="nav-link" th:href="@{/spring/{id}(id=${currentIndex})}">Spring</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/patterns/{id}(id=${currentIndex})}">Algorithms / Patterns</a>
@@ -125,6 +125,12 @@
             <a th:if="${currentIndex > 0}" th:href="@{/hibernate/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/hibernate/{id}(id=${currentIndex + 1})}"
+               class="btn btn-warning">Следующий вопрос</a>
+        </div>
+        <div th:case="'SPRING'">
+            <a th:if="${currentIndex > 0}" th:href="@{/spring/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+                вопрос</a>
+            <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/spring/{id}(id=${currentIndex + 1})}"
                class="btn btn-warning">Следующий вопрос</a>
         </div>
         <div th:case="'PATTERNS_ALGORITHMS'">

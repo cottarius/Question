@@ -26,6 +26,15 @@ public class QuestionController {
         }
     }
 
+    @GetMapping("/spring/{currentIndex}")
+    public String getSpringQuestions(@PathVariable int currentIndex, Model model) {
+        List<Question> questions = questionService.getQuestionsFromTheme(Theme.SPRING);
+        checkIndex(questions);
+        model.addAttribute("questions", questions);
+        model.addAttribute("currentIndex", currentIndex);
+        return "questions";
+    }
+
     @GetMapping("/hibernate/{currentIndex}")
     public String getHibernateQuestions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getQuestionsFromTheme(Theme.HIBERNATE_JDBC);
