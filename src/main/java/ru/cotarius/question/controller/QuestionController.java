@@ -56,15 +56,17 @@ public class QuestionController {
     @GetMapping("/primary/{currentIndex}")
     public String getPrimaryQuestions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getPrimaryQuestions();
+        int randomIndex = random.nextInt(0, questions.size());
         checkIndex(questions);
-        model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
-        return "questions";
+        model.addAttribute("random", randomIndex);
+        model.addAttribute("questions", questions);
+        return "primary_questions";
     }
 
     @GetMapping("/core1/{currentIndex}")
     public String getCore1Questions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getQuestionsFromTheme(Theme.CORE1);
+        List<Question> questions = questionService.getCore1Questions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
@@ -73,7 +75,7 @@ public class QuestionController {
 
     @GetMapping("/core2/{currentIndex}")
     public String getCore2Questions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getQuestionsFromTheme(Theme.CORE2_COLLECTIONS);
+        List<Question> questions = questionService.getCore2Questions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
@@ -82,7 +84,7 @@ public class QuestionController {
 
     @GetMapping("/core3/{currentIndex}")
     public String getCore3Questions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getQuestionsFromTheme(Theme.CORE3_MULTITHREADING);
+        List<Question> questions = questionService.getCore3Questions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
@@ -94,6 +96,7 @@ public class QuestionController {
         List<Question> questions = questionService.findAll();
         int randomIndex = random.nextInt(0, questions.size());
         checkIndex(questions);
+        model.addAttribute("currentIndex", currentIndex);
         model.addAttribute("random", randomIndex);
         model.addAttribute("questions", questions);
         return "all";
@@ -101,7 +104,7 @@ public class QuestionController {
 
     @GetMapping("/patterns/{currentIndex}")
     public String getPatternsQuestions(@PathVariable int currentIndex, Model model){
-        List<Question> questions = questionService.getQuestionsFromTheme(Theme.PATTERNS_ALGORITHMS);
+        List<Question> questions = questionService.getPatternsQuestions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
