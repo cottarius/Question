@@ -84,8 +84,8 @@
     <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
     <br><br>
     <h5>
-        <div id="answer" style="display: none;"><span
-                th:utext="${#strings.replace(questions.get(currentIndex).getAnswer(), '\n', '<br>')}"></span>
+        <div id="answer" style="display: none;">
+            <span th:utext="${#strings.replace(questions.get(currentIndex).getAnswer(), '\n', '<br>').replace('\t', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')}"></span>
         </div>
     </h5>
 

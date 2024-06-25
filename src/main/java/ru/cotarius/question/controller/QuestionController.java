@@ -28,7 +28,7 @@ public class QuestionController {
 
     @GetMapping("/spring/{currentIndex}")
     public String getSpringQuestions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getQuestionsFromTheme(Theme.SPRING);
+        List<Question> questions = questionService.getSpringQuestions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
@@ -37,7 +37,7 @@ public class QuestionController {
 
     @GetMapping("/hibernate/{currentIndex}")
     public String getHibernateQuestions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getQuestionsFromTheme(Theme.HIBERNATE_JDBC);
+        List<Question> questions = questionService.getHibernateQuestions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
@@ -46,7 +46,7 @@ public class QuestionController {
 
     @GetMapping("/sql/{currentIndex}")
     public String getSqlQuestion(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getQuestionsFromTheme(Theme.SQL_DATABASE);
+        List<Question> questions = questionService.getSqlQuestions();
         checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
@@ -56,7 +56,7 @@ public class QuestionController {
     @GetMapping("/primary/{currentIndex}")
     public String getPrimaryQuestions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getPrimaryQuestions();
-        int randomIndex = random.nextInt(0, questions.size());
+        int randomIndex = random.nextInt(questions.size());
         checkIndex(questions);
         model.addAttribute("currentIndex", currentIndex);
         model.addAttribute("random", randomIndex);
