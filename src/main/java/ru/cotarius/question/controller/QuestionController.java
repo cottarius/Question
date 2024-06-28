@@ -20,16 +20,10 @@ public class QuestionController {
     private final QuestionService questionService;
     private final Random random = new Random();
 
-    private void checkIndex(List<Question> questions) {
-        if (questionService.getIndex() >= questions.size() || questionService.getIndex() < 0) {
-            questionService.setIndex(0);
-        }
-    }
-
+   
     @GetMapping("/spring/{currentIndex}")
     public String getSpringQuestions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getSpringQuestions();
-        checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
         return "questions";
@@ -38,7 +32,6 @@ public class QuestionController {
     @GetMapping("/hibernate/{currentIndex}")
     public String getHibernateQuestions(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getHibernateQuestions();
-        checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
         return "questions";
@@ -47,45 +40,6 @@ public class QuestionController {
     @GetMapping("/sql/{currentIndex}")
     public String getSqlQuestion(@PathVariable int currentIndex, Model model) {
         List<Question> questions = questionService.getSqlQuestions();
-        checkIndex(questions);
-        model.addAttribute("questions", questions);
-        model.addAttribute("currentIndex", currentIndex);
-        return "questions";
-    }
-
-    @GetMapping("/primary/{currentIndex}")
-    public String getPrimaryQuestions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getPrimaryQuestions();
-        int randomIndex = random.nextInt(questions.size());
-        checkIndex(questions);
-        model.addAttribute("currentIndex", currentIndex);
-        model.addAttribute("random", randomIndex);
-        model.addAttribute("questions", questions);
-        return "primary_questions";
-    }
-
-    @GetMapping("/core1/{currentIndex}")
-    public String getCore1Questions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getCore1Questions();
-        checkIndex(questions);
-        model.addAttribute("questions", questions);
-        model.addAttribute("currentIndex", currentIndex);
-        return "questions";
-    }
-
-    @GetMapping("/core2/{currentIndex}")
-    public String getCore2Questions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getCore2Questions();
-        checkIndex(questions);
-        model.addAttribute("questions", questions);
-        model.addAttribute("currentIndex", currentIndex);
-        return "questions";
-    }
-
-    @GetMapping("/core3/{currentIndex}")
-    public String getCore3Questions(@PathVariable int currentIndex, Model model) {
-        List<Question> questions = questionService.getCore3Questions();
-        checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
         return "questions";
@@ -95,17 +49,49 @@ public class QuestionController {
     public String getAllQuestions(@PathVariable int currentIndex, Model model){
         List<Question> questions = questionService.findAll();
         int randomIndex = random.nextInt(0, questions.size());
-        checkIndex(questions);
         model.addAttribute("currentIndex", currentIndex);
         model.addAttribute("random", randomIndex);
         model.addAttribute("questions", questions);
         return "all";
     }
 
+    @GetMapping("/primary/{currentIndex}")
+    public String getPrimaryQuestions(@PathVariable int currentIndex, Model model) {
+        List<Question> questions = questionService.getPrimaryQuestions();
+        int randomIndex = random.nextInt(questions.size());
+        model.addAttribute("currentIndex", currentIndex);
+        model.addAttribute("random", randomIndex);
+        model.addAttribute("questions", questions);
+        return "primary_questions";
+    }
+
+    @GetMapping("/core1/{currentIndex}")
+    public String getCore1Questions(@PathVariable int currentIndex, Model model) {
+        List<Question> questions = questionService.getCore1Questions();
+        model.addAttribute("questions", questions);
+        model.addAttribute("currentIndex", currentIndex);
+        return "questions";
+    }
+
+    @GetMapping("/core2/{currentIndex}")
+    public String getCore2Questions(@PathVariable int currentIndex, Model model) {
+        List<Question> questions = questionService.getCore2Questions();
+        model.addAttribute("questions", questions);
+        model.addAttribute("currentIndex", currentIndex);
+        return "questions";
+    }
+
+    @GetMapping("/core3/{currentIndex}")
+    public String getCore3Questions(@PathVariable int currentIndex, Model model) {
+        List<Question> questions = questionService.getCore3Questions();
+        model.addAttribute("questions", questions);
+        model.addAttribute("currentIndex", currentIndex);
+        return "questions";
+    }
+
     @GetMapping("/patterns/{currentIndex}")
     public String getPatternsQuestions(@PathVariable int currentIndex, Model model){
         List<Question> questions = questionService.getPatternsQuestions();
-        checkIndex(questions);
         model.addAttribute("questions", questions);
         model.addAttribute("currentIndex", currentIndex);
         return "questions";

@@ -50,11 +50,6 @@ public class QuestionService {
         return questions;
     }
 
-//    public void checkIndex(List<Question> questions) {
-//        if (index >= questions.size()) {
-//            index = 0;
-//        }
-//    }
     public List<Question> getHibernateQuestions() {
         return getQuestionsFromTheme(Theme.HIBERNATE_JDBC);
     }
