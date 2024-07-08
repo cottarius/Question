@@ -81,7 +81,7 @@
     </h1>
     <br>
 
-    <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
+    <button onclick="showAnswer()" class="btn btn-primary btn-sm">Показать ответ</button>
     <br><br>
     <h5>
         <div id="answer" style="display: none;">
@@ -99,46 +99,46 @@
 
     <div th:switch="${questions.get(currentIndex).getTheme().toString()}">
         <div th:case="'CORE1'">
-            <a th:if="${currentIndex > 0}" th:href="@{/core1/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+            <a th:if="${currentIndex > 0}" th:href="@{/core1/{id}(id=${currentIndex - 1})}" class="btn btn-primary btn-sm">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/core1/{id}(id=${currentIndex + 1})}"
-               class="btn btn-warning">Следующий вопрос</a>
+               class="btn btn-warning btn-sm">Следующий вопрос</a>
         </div>
         <div th:case="'CORE2_COLLECTIONS'">
-            <a th:if="${currentIndex > 0}" th:href="@{/core2/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+            <a th:if="${currentIndex > 0}" th:href="@{/core2/{id}(id=${currentIndex - 1})}" class="btn btn-primary btn-sm">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/core2/{id}(id=${currentIndex + 1})}"
-               class="btn btn-warning">Следующий вопрос</a>
+               class="btn btn-warning btn-sm">Следующий вопрос</a>
         </div>
         <div th:case="'CORE3_MULTITHREADING'">
-            <a th:if="${currentIndex > 0}" th:href="@{/core3/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+            <a th:if="${currentIndex > 0}" th:href="@{/core3/{id}(id=${currentIndex - 1})}" class="btn btn-primary btn-sm">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/core3/{id}(id=${currentIndex + 1})}"
-               class="btn btn-warning">Следующий вопрос</a>
+               class="btn btn-warning btn-sm">Следующий вопрос</a>
         </div>
         <div th:case="'SQL_DATABASE'">
-            <a th:if="${currentIndex > 0}" th:href="@{/sql/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+            <a th:if="${currentIndex > 0}" th:href="@{/sql/{id}(id=${currentIndex - 1})}" class="btn btn-primary btn-sm">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/sql/{id}(id=${currentIndex + 1})}"
-               class="btn btn-warning">Следующий вопрос</a>
+               class="btn btn-warning btn-sm">Следующий вопрос</a>
         </div>
         <div th:case="'HIBERNATE_JDBC'">
-            <a th:if="${currentIndex > 0}" th:href="@{/hibernate/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+            <a th:if="${currentIndex > 0}" th:href="@{/hibernate/{id}(id=${currentIndex - 1})}" class="btn btn-primary btn-sm">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/hibernate/{id}(id=${currentIndex + 1})}"
-               class="btn btn-warning">Следующий вопрос</a>
+               class="btn btn-warning btn-sm">Следующий вопрос</a>
         </div>
         <div th:case="'SPRING'">
-            <a th:if="${currentIndex > 0}" th:href="@{/spring/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+            <a th:if="${currentIndex > 0}" th:href="@{/spring/{id}(id=${currentIndex - 1})}" class="btn btn-primary btn-sm">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/spring/{id}(id=${currentIndex + 1})}"
-               class="btn btn-warning">Следующий вопрос</a>
+               class="btn btn-warning btn-sm">Следующий вопрос</a>
         </div>
         <div th:case="'PATTERNS_ALGORITHMS'">
-            <a th:if="${currentIndex > 0}" th:href="@{/patterns/{id}(id=${currentIndex - 1})}" class="btn btn-primary">Предыдущий
+            <a th:if="${currentIndex > 0}" th:href="@{/patterns/{id}(id=${currentIndex - 1})}" class="btn btn-primary btn-sm">Предыдущий
                 вопрос</a>
             <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/patterns/{id}(id=${currentIndex + 1})}"
-               class="btn btn-warning">Следующий вопрос</a>
+               class="btn btn-warning btn-sm">Следующий вопрос</a>
         </div>
     </div>
 

@@ -81,7 +81,7 @@
         <div th:text="${questions.get(currentIndex).getQuestion()}"></div>
     </h1>
     <br>
-    <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
+    <button onclick="showAnswer()" class="btn btn-primary btn-sm">Показать ответ</button>
     <br><br>
     <h5>
         <div id="answer" style="display: none;">
@@ -91,11 +91,11 @@
 
     <br>
 
-<!--    <a th:if="${random > 0}" th:href="@{/all/{id}(id=${random - 1})}" class="btn btn-primary">Предыдущий вопрос</a>-->
-<!--    <a th:href="@{/all/{id}(id=${random})}" class="btn btn-warning">Следующий-->
+<!--    <a th:if="${random > 0}" th:href="@{/all/{id}(id=${random - 1})}" class="btn btn-primary btn-sm">Предыдущий вопрос</a>-->
+<!--    <a th:href="@{/all/{id}(id=${random})}" class="btn btn-warning btn-sm">Следующий-->
 <!--        вопрос</a>-->
-    <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/all/{id}(id=${currentIndex + 1})}" class="btn btn-primary">Следующий вопрос</a>
-    <a th:href="@{/all/{id}(id=${random})}" class="btn btn-warning">Случайный вопрос</a>
+    <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/all/{id}(id=${currentIndex + 1})}" class="btn btn-primary btn-sm">Следующий вопрос</a>
+    <a th:href="@{/all/{id}(id=${random})}" class="btn btn-warning btn-sm">Случайный вопрос</a>
 
 
 </div>

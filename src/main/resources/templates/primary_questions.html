@@ -81,7 +81,7 @@
     </h1>
     <br>
 
-    <button onclick="showAnswer()" class="btn btn-primary">Показать ответ</button>
+    <button onclick="showAnswer()" class="btn btn-primary btn-sm">Показать ответ</button>
     <br><br>
     <h5>
         <div id="answer" style="display: none;">
@@ -96,11 +96,11 @@
     <!--    <a th:href="@{/previous-question}" class="btn btn-success">Previous Question</a>-->
     <!--    <button onclick="reloadPage()" class="btn btn-success">Следующий вопрос</button>-->
 
-    <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/primary/{id}(id=${currentIndex + 1})}" class="btn btn-primary">Следующий вопрос</a>
-    <a th:href="@{/primary/{id}(id=${random})}" class="btn btn-warning">Случайный вопрос</a>
+    <a th:if="${currentIndex < questions.size() - 1}" th:href="@{/primary/{id}(id=${currentIndex + 1})}" class="btn btn-primary btn-sm">Следующий вопрос</a>
+    <a th:href="@{/primary/{id}(id=${random})}" class="btn btn-warning btn-sm">Случайный вопрос</a>
 
 <!--    <a th:if="${currentIndex < questions.size() - 1}">-->
-<!--        <button onclick="reloadPage()" class="btn btn-warning">Следующий вопрос</button>-->
+<!--        <button onclick="reloadPage()" class="btn btn-warning btn-sm">Следующий вопрос</button>-->
 <!--    </a>-->
 
 
