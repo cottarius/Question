@@ -1,3 +1,4 @@
+.env
 
 HELP.md
 target/
@@ -15,7 +16,7 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.env
+
 .idea
 *.iws
 *.iml
