@@ -2,24 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>New Remind</title>
+    <title>Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
-<!--    <style>-->
-<!--        body {-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            height: 100vh;-->
-<!--            background-image: url('/registration.jpg');-->
-<!--            background-size: cover;-->
-<!--            background-position: center;-->
-<!--            background-repeat: no-repeat;-->
-<!--            background-attachment: fixed;-->
-<!--        }-->
-<!--    </style>-->
-
 </head>
 <body>
 
@@ -102,30 +90,5 @@
     </div>
 </div>
 
-<!--<div align="center">-->
-<!--    <h2>New User</h2>-->
-<!--    <form th:action="@{/registration}" th:object="${user}" method="post">-->
-<!--        <p>Name: <label>-->
-<!--            <input type="text" th:field="*{name}" />-->
-<!--        </label></p>-->
-<!--        <p>Email: <label>-->
-<!--            <input type="text" th:field="*{email}" />-->
-<!--            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>-->
-<!--        </label></p>-->
-<!--        <p>Login: <label>-->
-<!--            <input type="text" th:field="*{username}" />-->
-<!--            <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>-->
-<!--        </label></p>-->
-<!--        <p>Password: <label>-->
-<!--            <input type="password" th:field="*{password}" />-->
-<!--            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>-->
-<!--        </label></p>-->
-<!--        <p>Telegram ID: <label>-->
-<!--            <input type="text" th:field="*{telegramId}" />-->
-<!--        </label></p>-->
-<!--        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>-->
-<!--        <a href="/login">Back</a>-->
-<!--    </form>-->
-<!--</div>-->
 </body>
 </html>
