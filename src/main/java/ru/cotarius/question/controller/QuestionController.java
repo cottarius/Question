@@ -118,7 +118,7 @@ public class QuestionController {
         return "filtered-question";
     }
 
-    @GetMapping(value = {"/", "/index"})
+    @GetMapping(value = "/index")
     public String getIndex(Model model){
         model.addAttribute("currentIndex", questionService.getIndex());
         return "index";
