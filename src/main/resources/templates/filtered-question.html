@@ -84,7 +84,7 @@
         <br><br>
         <h5>
             <div id="answer" style="display: none;">
-                <span th:utext="${#strings.replace(questions.get(currentIndex).getAnswer(), '\n', '<br>').replace('\t', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')}"></span>
+                <span th:utext="${#strings.replace(question.getAnswer(), '\n', '<br>').replace('\t', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')}"></span>
             </div>
         </h5>
     </li>
