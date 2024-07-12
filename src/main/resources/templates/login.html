@@ -4,18 +4,18 @@
     <meta charset="ISO-8859-1">
     <title>Spring Security 6 + Thymeleaf Demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<!--    <style>-->
-<!--        body {-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            height: 100vh;-->
-<!--            background-image: url('/login.jpg');-->
-<!--            background-size: cover;-->
-<!--            background-position: center;-->
-<!--            background-repeat: no-repeat;-->
-<!--            background-attachment: fixed;-->
-<!--        }-->
-<!--    </style>-->
+    <!--    <style>-->
+    <!--        body {-->
+    <!--            margin: 0;-->
+    <!--            padding: 0;-->
+    <!--            height: 100vh;-->
+    <!--            background-image: url('/login.jpg');-->
+    <!--            background-size: cover;-->
+    <!--            background-position: center;-->
+    <!--            background-repeat: no-repeat;-->
+    <!--            background-attachment: fixed;-->
+    <!--        }-->
+    <!--    </style>-->
 </head>
 
 <body>
@@ -50,7 +50,8 @@
 
                 <div th:if="${param.logout}">
                     <div class="alert alert-info">
-                        You have been logged out.</div>
+                        You have been logged out.
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -63,32 +64,40 @@
                 <div class="form-group">
                     <label for="password">Password</label>:
                     <input type="password" id="password" name="password"
-                           class="form-control" placeholder="Enter Password" />
+                           class="form-control" placeholder="Enter Password"/>
                 </div>
 
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-6 col-sm">
+                        <div class="col-sm-6">
                             <input type="submit" name="login-submit"
                                    id="login-submit"
                                    class="form-control btn btn-primary"
-                                   value="Log In" />
+                                   value="Log In"/>
                         </div>
-                        <a class="btn btn-primary" href="/registration">Registration</a>
+                        <div class="col-sm-6 text-right">
+                            <input type="submit" name="login-registration"
+                                   id="login-registration"
+                                   class="form-control btn btn-primary"
+                                   value="Registration"/>
+                        </div>
+                        <a href="/registration" class="btn btn-secondary">Registration</a>
                     </div>
+                    <!--                        <a class="btn btn-primary" href="/registration">Registration</a>-->
                 </div>
-            </form>
-            <!-- Google Login Button -->
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <a class="btn btn-danger" href="/oauth2/authorization/google">
-                        <span class="glyphicon glyphicon-log-in"></span> Login with Google
-                    </a>
-                </div>
+        </div>
+        </form>
+        <!-- Google Login Button -->
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <a class="btn btn-danger" href="/oauth2/authorization/google">
+                    <span class="glyphicon glyphicon-log-in"></span> Login with Google
+                </a>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
