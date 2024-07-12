@@ -3,8 +3,8 @@ spring:
     name: Question
   datasource:
     url: jdbc:postgresql://localhost:5432/questionsdb
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
   security:
@@ -12,8 +12,8 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-id: 105117623295-9n3bd4job49hggm6jl198jufqta8372b.apps.googleusercontent.com
+            client-secret: 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
             scope: openid, profile, email
         #            redirect-uri: https://neocoder.su/login/oauth2/code/google
         provider:

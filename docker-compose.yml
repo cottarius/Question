@@ -15,6 +15,8 @@ services:
       - ./db/postgresql:/var/lib/postgresql
   app:
     image: 'cotarius/questions:0.0.2'
+    env_file:
+      - .env
     ports:
       - "8080:8080"
     volumes:
