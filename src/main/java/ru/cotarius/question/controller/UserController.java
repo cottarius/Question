@@ -31,14 +31,16 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registerUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String registerUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        user.setUsername(user.getUsername().toLowerCase());
-        user.setRole(Role.USER);
-        userService.saveUser(user);
-        return "redirect:/";
+//        user.setEmail(user.getEmail().toLowerCase());
+//        user.setUsername(user.getUsername().toLowerCase());
+//        user.setRole(Role.USER);
+//        userService.saveUser(user);
+        return userService.registerUser(user, model);
+//        return "redirect:/";
     }
 
     @GetMapping("/user/{id}")

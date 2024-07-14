@@ -33,7 +33,7 @@
             <h1>User Login Page</h1>
             <form th:action="@{/login}" method="post">
                 <div th:if="${param.error}">
-                    <div class="alert alert-danger">Invalid email</div>
+                    <div class="alert alert-danger">Invalid data</div>
                 </div>
 
                 <div th:if="${param.logout}">

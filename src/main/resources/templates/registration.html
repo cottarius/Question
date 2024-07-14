@@ -46,6 +46,7 @@
                                     th:field="*{username}"
                                     class="form-control"
                                     placeholder="Enter Username"
+                                    required
                             />
                             <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
                         </label>
@@ -60,6 +61,7 @@
                                     th:field="*{email}"
                                     class="form-control"
                                     placeholder="Enter User Email"
+                                    required
                             />
                             <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
                         </label>
@@ -77,6 +79,10 @@
                             />
                             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
                         </label>
+                    </div>
+
+                    <div th:if="${error}" style="color: red;">
+                        <p th:text="${error}"></p>
                     </div>
 
                     <div class="box-footer">
