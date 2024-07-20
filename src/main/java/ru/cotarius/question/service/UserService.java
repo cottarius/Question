@@ -28,17 +28,17 @@ public class UserService {
             model.addAttribute("error", "Email already exists");
             return "registration";
         }
-        User newUser = new User();
-        newUser.setUsername(user.getUsername().toLowerCase());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setEmail(user.getEmail().toLowerCase());
-        newUser.setRole(Role.USER);
-        userRepository.save(newUser);
+
+        saveUser(user);
         return "redirect:/login";
     }
 
     public User saveUser(User user) {
+        user.setUsername(user.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEmail(user.getEmail().toLowerCase());
+        user.setRole(Role.USER);
+
         return userRepository.save(user);
     }
 
