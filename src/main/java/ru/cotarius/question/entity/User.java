@@ -14,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "email should not be empty")
+    @NotEmpty(message = "usermane should not be empty")
     private String username;
 
     private String password;
@@ -23,9 +23,6 @@ public class User {
     @Email(message = "email should be valid")
     @Column(name = "email")
     private String email;
-
-    @Column(name = "google_id")
-    private String googleId;
 
     @Enumerated(EnumType.STRING)
     private Role role;

@@ -53,19 +53,17 @@ public class UserService {
 
     /**
      * Поиск пользователя по google id в репозитории. Если пользователь существует - то он возвращается. Иначе - создается новый
-     * @param googleId google id пользователя
      * @param email email пользователя
      * @return пользователь
      */
-    public User findByGoogleIdOrCreateNew(String googleId, String email) {
-        Optional<User> userOptional = userRepository.findByGoogleId(googleId);
+    public User findByEmailIdOrCreateNew(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             return userOptional.get();
         } else {
             User newUser = new User();
             newUser.setEmail(email);
             newUser.setRole(Role.USER);
-            newUser.setGoogleId(googleId.toLowerCase());
             newUser.setUsername(email.toLowerCase());
 
             userRepository.save(newUser);

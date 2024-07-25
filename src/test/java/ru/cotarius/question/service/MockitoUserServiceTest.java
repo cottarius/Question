@@ -68,7 +68,7 @@ public class MockitoUserServiceTest {
 
         User createdUser = userService.saveUser(user1);
         assertNotNull(createdUser);
-        assertEquals("testUser1", createdUser.getUsername());
+        assertEquals("testuser1", createdUser.getUsername());
         assertEquals("encodedPassword", createdUser.getPassword());
 
         // Проверяем, что методы encode и save были вызваны один раз

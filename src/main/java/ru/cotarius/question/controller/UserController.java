@@ -2,7 +2,6 @@ package ru.cotarius.question.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -12,11 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.cotarius.question.entity.Role;
 import ru.cotarius.question.entity.User;
 import ru.cotarius.question.service.UserService;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,12 +31,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-//        user.setEmail(user.getEmail().toLowerCase());
-//        user.setUsername(user.getUsername().toLowerCase());
-//        user.setRole(Role.USER);
-//        userService.saveUser(user);
         return userService.registerUser(user, model);
-//        return "redirect:/";
     }
 
     @GetMapping("/user/{id}")
@@ -50,14 +41,20 @@ public class UserController {
         return "index";
     }
 
+    /**
+     * Метод для сохранения oauth2-пользователя в user repository
+     * @param principal oauth2-пользователь
+     * @param model
+     * @return
+     */
     @GetMapping("/oauth2LoginSuccess")
     public String oauth2LoginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model) {
         // Используйте данные, полученные из Google, для отображения информации о пользователе
-        String googleId = principal.getAttribute("sub");
+//        String googleId = principal.getAttribute("sub");
         String email = principal.getAttribute("email");
+//        String githubId = principal.getAttribute("id");
 
-        User user = userService.findByGoogleIdOrCreateNew(googleId, email);
-
+        User user = userService.findByEmailIdOrCreateNew(email);
 
 //        model.addAttribute("keyword", keyword);
 
