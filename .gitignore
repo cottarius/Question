@@ -1,6 +1,7 @@
 .env
 application-secret.yml
 docker-compose.yml
+temp-application.yml
 
 HELP.md
 target/

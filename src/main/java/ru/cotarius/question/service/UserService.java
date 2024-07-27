@@ -62,7 +62,7 @@ public class UserService {
             return userOptional.get();
         } else {
             User newUser = new User();
-            newUser.setEmail(email);
+            newUser.setEmail(email.toLowerCase());
             newUser.setRole(Role.USER);
             newUser.setUsername(email.toLowerCase());
 

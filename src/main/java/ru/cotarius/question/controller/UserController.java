@@ -52,8 +52,12 @@ public class UserController {
     public String oauth2LoginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model) {
         // Используйте данные, полученные из Google, для отображения информации о пользователе
 //        String googleId = principal.getAttribute("sub");
-        String email = principal.getAttribute("email");
-//        String githubId = principal.getAttribute("id");
+        String email = null;
+        if (principal.getAttributes().containsKey("default_email")) {
+            email = principal.getAttribute("default_email");
+        } else if (principal.getAttributes().containsKey("email")) {
+            email = principal.getAttribute("email");
+        }
 
         User user = userService.findByEmailIdOrCreateNew(email);
 

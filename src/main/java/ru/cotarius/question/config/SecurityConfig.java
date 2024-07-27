@@ -35,7 +35,7 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
-                        .defaultSuccessUrl("/index", true)
+                        .defaultSuccessUrl("/oauth2LoginSuccess", true)
 //                        .defaultSuccessUrl("/oauth2LoginSuccess", true)) // для сохранения oauth2-пользователя в репозиторий
                 )
                 .formLogin(form -> form
