@@ -2,32 +2,24 @@ spring:
   application:
     name: Question
   datasource:
-    url: jdbc:postgresql://localhost:5432/questionsdb
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
   security:
     oauth2:
       client:
         registration:
           google:
-            client-id: 105117623295-9n3bd4job49hggm6jl198jufqta8372b.apps.googleusercontent.com
-            client-secret: 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
-#            scope: openid, profile, email
-        #            redirect-uri: https://neocoder.su/login/oauth2/code/google
-          github:
-            client-id: Ov23lijbziNKtt7syKOP
-            client-secret: 72ebb2f508288d960f0de470c37c280875ebdb49
-#            scope: user, user:email
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
           yandex:
             provider: yandex
-            client-id: 7b0ded92dc6f45a28b4c877576b52909
-            client-secret: f9a92ec709d94d948b3b4751d7a5b543
-            redirect-uri: https://neocoder.su/login/oauth2/code/yandex
+            client-id: ${YANDEX_CLIENT_ID}
+            client-secret: ${YANDEX_CLIENT_SECRET}
+            redirect-uri: ${YANDEX_REDIRECT_URI}
             authorizationGrantType: authorization_code
             clientName: Yandex
-
 # Яндекса нет в списке OAuth2ClientProperties, поэтому самостоятельно настраиваем provider
         provider:
           yandex:
@@ -35,16 +27,3 @@ spring:
             token-uri: https://oauth.yandex.ru/token
             user-name-attribute: default_email
             userInfoUri: https://login.yandex.ru/info
-
-#        provider:
-#          google:
-#            authorization-uri: https://accounts.google.com/o/oauth2/auth
-#            token-uri: https://oauth2.googleapis.com/token
-#            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
-#            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
-#            user-name-attribute: sub
-#          github:
-#            authorization-uri: https://github.com/login/oauth/authorize
-#            token-uri: https://github.com/login/oauth/access_token
-#            user-info-uri: https://api.github.com/user
-#            user-name-attribute: id
