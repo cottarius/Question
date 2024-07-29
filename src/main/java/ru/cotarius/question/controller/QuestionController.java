@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.cotarius.question.entity.Question;
-import ru.cotarius.question.entity.Theme;
 import ru.cotarius.question.service.QuestionService;
 
 import java.util.List;
@@ -119,7 +118,7 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/index")
-    public String getIndex(){
+    public String mainPage(){
 //        model.addAttribute("currentIndex", questionService.getIndex());
         return "index";
     }

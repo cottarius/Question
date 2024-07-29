@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 
 services:
   db:
@@ -14,7 +14,7 @@ services:
     volumes:
       - ./db:/var/lib/postgresql/data
   app:
-    image: 'cotarius/questions:0.1.10'
+    image: 'cotarius/questions:0.1.12'
     ports:
       - "8080:8080"
     volumes:

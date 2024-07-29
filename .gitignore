@@ -2,6 +2,8 @@
 application-secret.yml
 docker-compose.yml
 temp-application.yml
+application-temp.yml
+db/
 
 HELP.md
 target/

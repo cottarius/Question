@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: Question
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/questionsdb
+    username: postgres
+    password: postgres
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 105117623295-9n3bd4job49hggm6jl198jufqta8372b.apps.googleusercontent.com
+            client-secret: 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
+          yandex:
+            provider: yandex
+            client-id: 7b0ded92dc6f45a28b4c877576b52909
+            client-secret: f9a92ec709d94d948b3b4751d7a5b543
+            redirect-uri: http://localhost:8080/login/oauth2/code/yandex
+            authorizationGrantType: authorization_code
+            clientName: Yandex
+        # Яндекса нет в списке OAuth2ClientProperties, поэтому самостоятельно настраиваем provider
+        provider:
+          yandex:
+            authorization-uri: https://oauth.yandex.ru/authorize
+            token-uri: https://oauth.yandex.ru/token
+            user-name-attribute: default_email
+            userInfoUri: https://login.yandex.ru/info
