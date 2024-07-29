@@ -119,8 +119,8 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/index")
-    public String getIndex(Model model){
-        model.addAttribute("currentIndex", questionService.getIndex());
+    public String getIndex(){
+//        model.addAttribute("currentIndex", questionService.getIndex());
         return "index";
     }
 }

@@ -34,13 +34,14 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/oauth2LoginSuccess", true)
-//                        .defaultSuccessUrl("/oauth2LoginSuccess", true)) // для сохранения oauth2-пользователя в репозиторий
+                                .loginPage("/login")
+//                                .defaultSuccessUrl("/index")
+                                .defaultSuccessUrl("/oauth2LoginSuccess", true) // для сохранения oauth2-пользователя в репозиторий
+                                .failureUrl("/login")
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/index", true)
+                        .defaultSuccessUrl("/index")
                         .permitAll()
                 )
                 .logout(logout -> logout
