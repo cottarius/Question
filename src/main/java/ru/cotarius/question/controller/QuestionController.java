@@ -97,25 +97,32 @@ public class QuestionController {
     }
 
     @PostMapping("/search")
-    public String searchQuestions(@RequestParam() String query, Model model) {
+    public String searchQuestions(@RequestParam String query,
+                                  @RequestParam(required = false, defaultValue = "0") int currentIndex,
+                                  Model model) {
         List<Question> questions = questionService.findAll();
-        Question findedQuestion = null;
-        String message = "No results found";
-        for (Question question : questions) {
+        Question foundQuestion = null;
+        String message = "No more results found";
+
+        for (int i = currentIndex; i < questions.size(); i++) {
+            Question question = questions.get(i);
             if (question.getQuestion().toLowerCase().contains(query.toLowerCase())) {
-                findedQuestion = question;
+                foundQuestion = question;
+                currentIndex = i + 1;  // сохранить следующий индекс для продолжения
                 break;
             }
         }
-        if (findedQuestion != null) {
-            model.addAttribute("question", findedQuestion);
-            model.addAttribute("currentIndex", questionService.getIndex());
+
+        if (foundQuestion != null) {
+            model.addAttribute("question", foundQuestion);
+            model.addAttribute("query", query);  // сохранить текущий запрос
+            model.addAttribute("currentIndex", currentIndex);  // сохранить текущий индекс
         } else {
             model.addAttribute("message", message);
-            model.addAttribute("currentIndex", questionService.getIndex());
         }
         return "filtered-question";
     }
+
 
     @GetMapping(value = "/index")
     public String mainPage(){
