@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-firstname-lastname
+      author: cotarius
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: firstname
+                  type: varchar(255)
+              - column:
+                  name: lastname
+                  type: varchar(255)

@@ -38,6 +38,36 @@
             <div class="card-body">
                 <form th:action="@{/registration}" th:object="${user}" method="post">
                     <div class="form-group">
+                        <label> Firstname </label>
+                        <label>
+                            <input
+                                    type="text"
+                                    name="firstname"
+                                    th:field="*{firstname}"
+                                    class="form-control"
+                                    placeholder="Enter first name"
+                                    required
+                            />
+                            <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Name error</div>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label> Lastname </label>
+                        <label>
+                            <input
+                                    type="text"
+                                    name="lastname"
+                                    th:field="*{lastname}"
+                                    class="form-control"
+                                    placeholder="Enter last name"
+                                    required
+                            />
+                            <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Name error</div>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
                         <label> Username </label>
                         <label>
                             <input
@@ -45,7 +75,7 @@
                                     name="username"
                                     th:field="*{username}"
                                     class="form-control"
-                                    placeholder="Enter Username"
+                                    placeholder="Enter user name"
                                     required
                             />
                             <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>

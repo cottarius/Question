@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-tag-1.0.9
+      author: cotarius
+
+  - include:
+      file: add-firstname-lastname.yaml
+      relativeToChangelogFile: true

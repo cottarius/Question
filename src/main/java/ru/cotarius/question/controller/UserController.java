@@ -79,15 +79,16 @@ public class UserController {
         return "index"; // имя HTML-шаблона, который вы хотите отобразить
     }
 
-    @GetMapping("/temp")
-    public String temp(Authentication authentication, Model model) {
+    @GetMapping("/loginSuccess")
+    public String loginSuccess(Authentication authentication, Model model) {
         Object principal = authentication.getPrincipal();
 
         MyUserDetails userDetails = (MyUserDetails) principal;
         User user = userDetails.getUser();
         String email = user.getEmail();
         String username = user.getUsername();
-        telegramBotService.sendMessage(username + ", " + email + " зашел на Java Quizzer", chatId);
+        String fullname = String.format("%s %s", user.getFirstname(), user.getLastname());
+        telegramBotService.sendMessage(fullname + ", " + email + " зашел на Java Quizzer", chatId);
 
         model.addAttribute("user", user);
         return "index"; // имя HTML-шаблона, который вы хотите отобразить
