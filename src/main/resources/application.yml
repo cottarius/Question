@@ -27,3 +27,6 @@ spring:
             token-uri: https://oauth.yandex.ru/token
             user-name-attribute: default_email
             userInfoUri: https://login.yandex.ru/info
+telegram:
+  token: ${TELEGRAM_TOKEN}
+  chat_id: ${TELEGRAM_CHAT_ID}

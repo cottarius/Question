@@ -1,8 +1,9 @@
 package ru.cotarius.question.controller;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -13,12 +14,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.cotarius.question.entity.User;
+import ru.cotarius.question.service.MyUserDetails;
+import ru.cotarius.question.service.TelegramBotService;
 import ru.cotarius.question.service.UserService;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final TelegramBotService telegramBotService;
+
+    @Value("${telegram.chat_id}")
+    private String chatId;
 
     @GetMapping("/registration")
     public String newUserForm(Model model) {
@@ -44,6 +51,7 @@ public class UserController {
 
     /**
      * Метод для сохранения oauth2-пользователя в user repository
+     *
      * @param principal oauth2-пользователь
      * @param model
      * @return
@@ -53,15 +61,33 @@ public class UserController {
         // Используйте данные, полученные из Google, для отображения информации о пользователе
 //        String googleId = principal.getAttribute("sub");
         String email = null;
+        String name = null;
         if (principal.getAttributes().containsKey("default_email")) {
             email = principal.getAttribute("default_email");
+            name = principal.getAttribute("real_name");
         } else if (principal.getAttributes().containsKey("email")) {
             email = principal.getAttribute("email");
+            name = principal.getAttribute("name");
         }
 
         User user = userService.findByEmailIdOrCreateNew(email);
 
 //        model.addAttribute("keyword", keyword);
+        telegramBotService.sendMessage(name + ", " + email + " зашел на Java Quizzer", chatId);
+
+        model.addAttribute("user", user);
+        return "index"; // имя HTML-шаблона, который вы хотите отобразить
+    }
+
+    @GetMapping("/temp")
+    public String temp(Authentication authentication, Model model) {
+        Object principal = authentication.getPrincipal();
+
+        MyUserDetails userDetails = (MyUserDetails) principal;
+        User user = userDetails.getUser();
+        String email = user.getEmail();
+        String username = user.getUsername();
+        telegramBotService.sendMessage(username + ", " + email + " зашел на Java Quizzer", chatId);
 
         model.addAttribute("user", user);
         return "index"; // имя HTML-шаблона, который вы хотите отобразить
