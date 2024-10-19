@@ -14,13 +14,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "firstname should not be empty")
+//    @NotEmpty(message = "firstname should not be empty")
     private String firstname;
 
 //    @NotEmpty(message = "lastname should not be empty")
     private String lastname;
 
-//    @NotEmpty(message = "usermane should not be empty")
+    @NotEmpty(message = "usermane should not be empty")
     private String username;
 
     private String password;

@@ -4,6 +4,7 @@ docker-compose.yml
 docker-compose.yaml
 temp-application.yml
 application-temp.yml
+*.temp
 
 
 HELP.md
