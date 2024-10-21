@@ -91,6 +91,6 @@ public class UserController {
         telegramBotService.sendMessage(fullname + ", " + email + " зашел на Java Quizzer", chatId);
 
         model.addAttribute("user", user);
-        return "index"; // имя HTML-шаблона, который вы хотите отобразить
+        return "index";
     }
 }
