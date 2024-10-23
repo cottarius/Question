@@ -31,13 +31,13 @@ public class UserController {
     public String newUserForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "registration";
+        return "sign-up";
     }
 
     @PostMapping("/registration")
     public String registerUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "sign-up";
         }
         return userService.registerUser(user, model);
     }
