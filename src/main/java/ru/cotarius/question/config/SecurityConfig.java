@@ -1,6 +1,5 @@
 package ru.cotarius.question.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,7 +18,6 @@ import ru.cotarius.question.service.MyUserDetailService;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     @Bean
@@ -32,17 +30,23 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/registration**").permitAll()
+                        .requestMatchers(
+                                "/registration**",
+                                "/css/**",
+                                "/images/**",
+                                "/fonts/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")//
-                        .defaultSuccessUrl("/oauth2LoginSuccess", true) // для сохранения oauth2-пользователя в репозиторий
-                        .failureUrl("/login")
+                                .loginPage("/login")
+//                                .defaultSuccessUrl("/index")
+                                .defaultSuccessUrl("/oauth2LoginSuccess", true) // для сохранения oauth2-пользователя в репозиторий
+                                .failureUrl("/login")
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")//
-                        .defaultSuccessUrl("/loginSuccess", true)
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/index")
                         .permitAll()
                 )
                 .logout(logout -> logout
