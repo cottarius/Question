@@ -2,6 +2,7 @@ package ru.cotarius.question.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +19,7 @@ import ru.cotarius.question.service.MyUserDetails;
 import ru.cotarius.question.service.TelegramBotService;
 import ru.cotarius.question.service.UserService;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class UserController {
@@ -73,7 +75,9 @@ public class UserController {
         User user = userService.findByEmailIdOrCreateNew(email);
 
 //        model.addAttribute("keyword", keyword);
-        telegramBotService.sendMessage(name + ", " + email + " зашел на Java Quizzer", chatId);
+        String message = name + ", " + email + " зашел на Java Quizzer через oauth2.0";
+        telegramBotService.sendMessage(message, chatId);
+        log.info(message);
 
         model.addAttribute("user", user);
         return "index"; // имя HTML-шаблона, который вы хотите отобразить
@@ -88,7 +92,9 @@ public class UserController {
         String email = user.getEmail();
         String username = user.getUsername();
         String fullname = String.format("%s %s", user.getFirstname(), user.getLastname());
-        telegramBotService.sendMessage(fullname + ", " + email + " зашел на Java Quizzer", chatId);
+        String message = fullname + ", " + email + " зашел на Java Quizzer через login";
+        telegramBotService.sendMessage(message, chatId);
+        log.info(message);
 
         model.addAttribute("user", user);
         return "index";
