@@ -5,6 +5,7 @@ docker-compose.yaml
 temp-application.yml
 application-temp.yml
 *.temp
+*.json
 
 
 HELP.md
