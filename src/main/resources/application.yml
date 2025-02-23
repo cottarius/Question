@@ -27,6 +27,18 @@ spring:
             token-uri: https://oauth.yandex.ru/token
             user-name-attribute: default_email
             userInfoUri: https://login.yandex.ru/info
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GOOGLE_USERNAME}
+    password: ${GOOGLE_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 telegram:
   token: ${TELEGRAM_TOKEN}
   chat_id: ${TELEGRAM_CHAT_ID}
+
