@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Verify Email - Java Quizzer</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="main">
+
+    <!-- Verify Email form -->
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Verify Your Email</h2>
+                    <form method="POST" th:action="@{/verify-email}" class="register-form" id="verify-form">
+                        <!-- Скрытое поле для передачи email -->
+                        <input type="hidden" name="email" th:value="${email}">
+
+                        <!-- Поле для ввода проверочного кода -->
+                        <div class="form-group">
+                            <label for="code"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="text" name="code" id="code" placeholder="Verification Code" required>
+                        </div>
+
+                        <!-- Отображение ошибки, если код неверный -->
+                        <div th:if="${error != null}" class="form-group">
+                            <div class="error-message" th:text="${error}"></div>
+                        </div>
+
+                        <!-- Кнопка для подтверждения -->
+                        <div class="form-group form-button">
+                            <button type="submit" class="form-submit">Verify</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="/images/signup-image.jpg" alt="verify email image"></figure>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- JS -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
