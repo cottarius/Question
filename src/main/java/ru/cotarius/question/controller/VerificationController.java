@@ -30,5 +30,4 @@ public class VerificationController {
             return "verify-email";
         }
     }
-
 }
