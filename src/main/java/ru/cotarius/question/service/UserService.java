@@ -24,13 +24,13 @@ public class UserService {
 
     public String registerUser(User user, Model model) {
         if(userRepository.findByUsername(user.getUsername()).isPresent()) {
-            log.warn("Username already exists: {}", user.getUsername());
-            model.addAttribute("error", "Username already exists");
+            log.warn("Такой Username уже существует: {}", user.getUsername());
+            model.addAttribute("error", "Такой Username уже существует");
             return "registration";
         }
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            log.warn("Email already exists: {}", user.getEmail());
-            model.addAttribute("error", "Email already exists");
+            log.warn("Такой Email уже существует: {}", user.getEmail());
+            model.addAttribute("error", "Такой Email уже существует");
             return "registration";
         }
 
@@ -41,7 +41,7 @@ public class UserService {
 
         saveUser(user);
 
-        log.info("User registered successfully: {}", user.getEmail());
+        log.info("Пользователь успешно зарегестрирован: {}", user.getEmail());
 
         // Перенаправление на страницу подтверждения email
         model.addAttribute("email", user.getEmail());
@@ -55,7 +55,7 @@ public class UserService {
         user.setRole(Role.USER);
 
         User savedUser = userRepository.save(user);
-        log.debug("User saved: {}", savedUser);
+        log.debug("Пользователь сохранен: {}", savedUser);
         return savedUser;
     }
 
@@ -66,10 +66,10 @@ public class UserService {
             if (user.getVerificationCode().equals(code)) {
                 user.setEmailVerified(true);
                 userRepository.save(user);
-                log.info("Email verified successfully: {}", email);
+                log.info("Email успешно верифицирован: {}", email);
                 return true;
             } else {
-                log.warn("Invalid verification code for email: {}", email);
+                log.warn("Введен неправильный верификационный код email: {}", email);
             }
         }
         return false;

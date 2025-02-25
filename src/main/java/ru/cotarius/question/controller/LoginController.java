@@ -10,14 +10,10 @@ import ru.cotarius.question.service.UserService;
 public class LoginController {
     private final UserService userService;
 
-//    @GetMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
-@GetMapping("/login")
-public String login() {
-    return "sign-in";
-}
+    @GetMapping("/login")
+    public String login() {
+        return "sign-in";
+    }
 
     @GetMapping("/")
     public String home() {

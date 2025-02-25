@@ -18,7 +18,6 @@ import java.util.Random;
 public class QuestionController {
     private final QuestionService questionService;
     private final Random random = new Random();
-
    
     @GetMapping("/spring/{currentIndex}")
     public String getSpringQuestions(@PathVariable int currentIndex, Model model) {
