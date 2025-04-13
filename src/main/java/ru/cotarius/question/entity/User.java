@@ -36,4 +36,6 @@ public class User {
     private String verificationCode;// Код для подтверждения email
 
     private boolean emailVerified; // Статус подтверждения email
+
+    private int verificationAttempts;
 }

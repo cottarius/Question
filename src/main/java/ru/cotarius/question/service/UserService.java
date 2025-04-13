@@ -22,6 +22,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
 
+//    private static int verificationAttempts = 1;
+
     public String registerUser(User user, Model model) {
         if(userRepository.findByUsername(user.getUsername()).isPresent()) {
             log.warn("Такой Username уже существует: {}", user.getUsername());
@@ -41,11 +43,11 @@ public class UserService {
 
         saveUser(user);
 
-        log.info("Пользователь успешно зарегестрирован: {}", user.getEmail());
+        log.info("Пользователь временно сохранен для верификации: {}", user.getEmail());
 
         // Перенаправление на страницу подтверждения email
         model.addAttribute("email", user.getEmail());
-        return "verify-email";
+        return "redirect:/verify-email?email=" + user.getEmail();
     }
 
     public User saveUser(User user) {
@@ -63,13 +65,23 @@ public class UserService {
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            user.setVerificationAttempts(user.getVerificationAttempts() + 1);
+//            verificationAttempts++;
+
             if (user.getVerificationCode().equals(code)) {
                 user.setEmailVerified(true);
-                userRepository.save(user);
+//                userRepository.save(user);
                 log.info("Email успешно верифицирован: {}", email);
                 return true;
             } else {
-                log.warn("Введен неправильный верификационный код email: {}", email);
+                log.warn("Неудачная попытка верификации email: {}. Попытка №{}", email, user.getVerificationAttempts());
+
+                if (user.getVerificationAttempts() >= 3) {
+                    userRepository.delete(user);
+                    log.warn("Пользователь {} удален из-за 3 неудачных попыток верификации", email);
+                } else {
+                    userRepository.save(user);
+                }
             }
         }
         return false;

@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-verification-attempts-to-users
+      author: cotarius
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: verification_attempts
+                  type: int
