@@ -60,7 +60,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
             sendMessage.setText(message);
             try {
                 execute(sendMessage);
-                log.atLevel(Level.INFO).log("Message sent to telegram");
+                log.atLevel(Level.INFO).log("Message sent to user with chatId: {}", chatID);
             } catch (TelegramApiException e) {
                 log.atLevel(Level.WARN).log("Error while sending message: " + e.getMessage());
             }
