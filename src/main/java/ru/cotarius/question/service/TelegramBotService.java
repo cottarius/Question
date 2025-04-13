@@ -36,6 +36,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
             log.info("Получено сообщение :{}", update.getMessage().getText());
             String userMessage = update.getMessage().getText();
             Long chatId = update.getMessage().getChatId();
+            log.info("Получен chatId:{}", chatId);
 
             String reply = chatClient.prompt()
                     .system("Отвечай на русском языке")
@@ -52,7 +53,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
         return "Cotarius";
     }
 
-    public void sendMessage(String message, String chatID) {
+    public void sendMessage(String chatID, String message) {
         SendMessage sendMessage = new SendMessage();
         if (chatID != null) {
             sendMessage.setChatId(chatID);
