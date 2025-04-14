@@ -37,5 +37,5 @@ public class User {
 
     private boolean emailVerified; // Статус подтверждения email
 
-    private int verificationAttempts;
+    private int verificationAttempts = 0;
 }

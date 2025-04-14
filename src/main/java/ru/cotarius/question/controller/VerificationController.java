@@ -31,7 +31,7 @@ public class VerificationController {
     @PostMapping("/verify-email")
     public String verifyEmail(@RequestParam String email, @RequestParam String code, HttpServletRequest request, Model model) {
         if (userService.verifyEmail(email, code)) {
-            return "redirect:/login";
+            return "redirect:/";
         } else {
             // Проверяем, существует ли еще пользователь (возможно, он был удален)
             Optional<User> userOptional = userRepository.findByEmail(email);

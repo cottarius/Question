@@ -44,7 +44,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
                     .call()
                     .content();
 
-            sendMessage(chatId.toString(), reply);
+            sendMessage(reply, chatId.toString());
         }
     }
 
@@ -53,7 +53,7 @@ public class TelegramBotService extends TelegramLongPollingBot {
         return "Cotarius";
     }
 
-    public void sendMessage(String chatID, String message) {
+    public void sendMessage(String message, String chatID) {
         SendMessage sendMessage = new SendMessage();
         if (chatID != null) {
             sendMessage.setChatId(chatID);
