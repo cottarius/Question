@@ -16,16 +16,28 @@ import ru.cotarius.question.service.MyUserDetails;
 import ru.cotarius.question.service.TelegramBotService;
 import ru.cotarius.question.service.UserService;
 
+/**
+ * Контроллер для работы с пользователями.
+ *
+ * @author olegprokopenko
+ */
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
     private final TelegramBotService telegramBotService;
 
     @Value("${telegram.chat_id}")
     private String chatId;
 
+    /**
+     * Отображает форму для регистрации нового пользователя.
+     *
+     * @param model модель MVC для передачи объекта пользователя в представление.
+     * @return имя шаблона страницы регистрации.
+     */
     @GetMapping("/registration")
     public String newUserForm(Model model) {
         User user = new User();
@@ -33,6 +45,17 @@ public class UserController {
         return "sign-up";
     }
 
+    /**
+     * Обрабатывает регистрацию нового пользователя.
+     * Проверяет совпадение пароля и нового ввода, а также ошибки валидации.
+     * При успешной регистрации делегирует сохранение пользователя в сервис UserService.
+     *
+     * @param user объект пользователя для регистрации (валидация через @Valid).
+     * @param confirmPassword повторный ввод пароля для проверки совпадения.
+     * @param bindingResult результат валидации формы.
+     * @param model модель MVC для передачи ошибок или аттрибутов в представление.
+     * @return имя шаблона или результат метода регистрации из UserService.
+     */
     @PostMapping("/registration")
     public String registerUser(@ModelAttribute("user") @Valid User user,
                                @RequestParam String confirmPassword,
@@ -48,6 +71,13 @@ public class UserController {
         return userService.registerUser(user, model);
     }
 
+    /**
+     * Отображает форму профиля пользователя по его id.
+     *
+     * @param id идентификатор пользователя.
+     * @param model модель MVC для передачи информации о пользователе.
+     * @return имя шаблона страницы профиля.
+     */
     @GetMapping("/user/{id}")
     public String getUserForm(@PathVariable long id, Model model) {
         User user = userService.findById(id);
@@ -56,11 +86,12 @@ public class UserController {
     }
 
     /**
-     * Метод для сохранения oauth2-пользователя в user repository
+     * Сохраняет пользователя, авторизованного через OAuth2 и отправляет уведомление в Telegram о входе.
+     * Использует данные профиля (имя, email) из OAuth2.
      *
-     * @param principal oauth2-пользователь
-     * @param model
-     * @return
+     * @param principal информация о пользователе из OAuth2.
+     * @param model модель MVC для передачи данных пользователя в представление.
+     * @return имя html-шаблона для отображения страницы пользователя.
      */
     @GetMapping("/oauth2LoginSuccess")
     public String oauth2LoginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model) {
@@ -87,6 +118,13 @@ public class UserController {
         return "index"; // имя HTML-шаблона, который вы хотите отобразить
     }
 
+    /**
+     * Отправляет уведомление в Telegram о входе пользователя через стандартную форму логина.
+     *
+     * @param authentication информация об аутентифицированном пользователе.
+     * @param model модель MVC для передачи данных пользователя в представление.
+     * @return имя html-шаблона для страницы пользователя.
+     */
     @GetMapping("/loginSuccess")
     public String loginSuccess(Authentication authentication, Model model) {
         Object principal = authentication.getPrincipal();
@@ -94,7 +132,6 @@ public class UserController {
         MyUserDetails userDetails = (MyUserDetails) principal;
         User user = userDetails.getUser();
         String email = user.getEmail();
-        String username = user.getUsername();
         String fullname = String.format("%s %s", user.getFirstname(), user.getLastname());
         String message = fullname + ", " + email + " зашел на Java Quizzer через login";
         telegramBotService.sendMessage(message, chatId);
