@@ -10,7 +10,7 @@
     </parent>
     <groupId>ru.cotarius</groupId>
     <artifactId>Question</artifactId>
-    <version>${revision}-${name}-SNAPSHOT</version>
+    <version>${name}-${revision}-SNAPSHOT</version>
     <name>Question</name>
     <description>Question</description>
     <properties>
@@ -56,11 +56,10 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
