@@ -1,5 +1,10 @@
 package ru.cotarius.question.entity;
 
+/**
+ * Перечисление теи вопросов.
+ *
+ * @author olegprokopenko
+ */
 public enum Theme {
     CORE1,
     CORE2_COLLECTIONS,
