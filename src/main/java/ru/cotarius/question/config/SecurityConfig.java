@@ -15,16 +15,34 @@ import org.springframework.security.web.SecurityFilterChain;
 import ru.cotarius.question.repository.UserRepository;
 import ru.cotarius.question.service.MyUserDetailService;
 
+/**
+ * Конфигурационный класс Spring Security для настройки безопасности приложения.
+ * Определяет правила аутентификации, авторизации, формы входа, выхода и OAuth2.
+ *
+ * @author olegprokopenko
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    /**
+     * Создает и возвращает кодировщик паролей BCrypt.
+     *
+     * @return экземпляр BCryptPasswordEncoder для хеширования паролей.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Настраивает цепочку фильтров безопасности HTTP.
+     *
+     * @param http объект HttpSecurity для настройки.
+     * @return сконфигурированная цепочка фильтров безопасности.
+     * @throws Exception если произошла ошибка при настройке.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -58,6 +76,12 @@ public class SecurityConfig {
                 .build();
     }
 
+    /**
+     * Создает и настраивает провайдер аутентификации.
+     *
+     * @param userRepository репозиторий пользователей.
+     * @return настроенный DaoAuthenticationProvider.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider(UserRepository userRepository) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -66,6 +90,12 @@ public class SecurityConfig {
         return authProvider;
     }
 
+    /**
+     * Создает и возвращает сервис для работы с деталями пользователя.
+     *
+     * @param userRepository репозиторий пользователей.
+     * @return реализацию UserDetailsService.
+     */
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new MyUserDetailService(userRepository);
