@@ -95,8 +95,7 @@ public class UserController {
      */
     @GetMapping("/oauth2LoginSuccess")
     public String oauth2LoginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model) {
-        // Используйте данные, полученные из Google, для отображения информации о пользователе
-//        String googleId = principal.getAttribute("sub");
+
         String email = null;
         String name = null;
         if (principal.getAttributes().containsKey("default_email")) {
@@ -109,13 +108,12 @@ public class UserController {
 
         User user = userService.findByEmailIdOrCreateNew(email);
 
-//        model.addAttribute("keyword", keyword);
         String message = name + ", " + email + " зашел на Java Quizzer через oauth2.0";
         telegramBotService.sendMessage(message, chatId);
         log.info(message);
 
         model.addAttribute("user", user);
-        return "index"; // имя HTML-шаблона, который вы хотите отобразить
+        return "index";
     }
 
     /**
