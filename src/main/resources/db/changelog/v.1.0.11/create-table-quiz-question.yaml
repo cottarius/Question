@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-quiz-question
+      author: cotarius
+
+  - include:
+      file: /sql/create-table-quiz-question.sql

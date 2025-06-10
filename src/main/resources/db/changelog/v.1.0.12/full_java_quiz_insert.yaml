@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: full_java_quiz_insert
+      author: cotarius
+
+  - include:
+      file: /sql/full_java_quiz_insert.sql

@@ -202,4 +202,4 @@ RPC позволяет сервисам напрямую вызывать мет
        ('', '', 'FASHION_TECHNOLOGIES', false),
        ('', '', 'FASHION_TECHNOLOGIES', false),
        ('', '', 'FASHION_TECHNOLOGIES', false),
-       ('', '', 'FASHION_TECHNOLOGIES', false),
+       ('', '', 'FASHION_TECHNOLOGIES', false);
