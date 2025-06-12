@@ -1,25 +1,78 @@
-<!-- resources/templates/quiz_result.html -->
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Результат Викторины</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="icon" href="/java-logo.jpg" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">
-        <img src="/java-logo.jpg" alt="Logo" style="width:40px;">
-    </a>
-    <a class="navbar-brand">Java Quizzer</a>
-    <div class="ms-auto">
-        <a href="/index" class="btn btn-outline-light">На главную</a>
+
+<!-- Адаптивный Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="/java-logo.jpg" alt="Logo" style="width:40px; height:40px;" class="me-2">
+            Java Quizzer
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index}">Main Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/all/{id}(id=0)}">All Questions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/primary/{id}(id=0)}">Primary Questions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/core1/{id}(id=0)}">JavaCore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/core2/{id}(id=0)}">JavaCore / Collections</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/core3/{id}(id=0)}">JavaCore / Multithreading</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/sql/{id}(id=0)}">SQL / Database</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/hibernate/{id}(id=0)}">Hibernate / JDBC</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/spring/{id}(id=0)}">Spring</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/patterns/{id}(id=0)}">Algorithms / Patterns</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index}">Fashion technologies</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+
+<!-- Контент -->
 <div class="container mt-4">
     <h2>Вы завершили викторину!</h2>
     <p th:text="'Ваш результат: ' + ${score} + ' из ' + ${total}"></p>
     <a href="/quiz/start" class="btn btn-primary">Попробовать снова</a>
 </div>
+
+<!-- Bootstrap Bundle (JS + Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsH6fME1EwE1zYd2FuLZNs3Vf9ef9z6UBXo"
+        crossorigin="anonymous"></script>
 </body>
 </html>

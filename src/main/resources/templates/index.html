@@ -63,13 +63,15 @@
     </div>
 </nav>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <form class="form-inline" method="post" action="/search">
-        <label>
-            <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search question">
-        </label>
-        <button class="btn btn-success" type="submit">Search</button>
-    </form>
+<!-- Secondary Navbar for Search and Start Quiz Button -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <!-- Search Form (Left Aligned) -->
+        <form class="d-flex me-auto" method="post" action="/search">
+            <input class="form-control me-2" type="text" name="query" placeholder="Search question">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+    </div>
 </nav>
 
 <div class="container mt-3">
@@ -128,9 +130,10 @@
     </h5>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap Bundle (JS + Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsH6fME1EwE1zYd2FuLZNs3Vf9ef9z6UBXo"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
