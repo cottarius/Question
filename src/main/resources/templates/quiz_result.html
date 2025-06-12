@@ -65,6 +65,10 @@
 
 <!-- Контент -->
 <div class="container mt-4">
+    <div class="d-flex justify-content-end mt-3">
+        <a href="/index" class="btn btn-outline-primary">На главную</a>
+    </div>
+
     <h2>Вы завершили викторину!</h2>
     <p th:text="'Ваш результат: ' + ${score} + ' из ' + ${total}"></p>
     <a href="/quiz/start" class="btn btn-primary">Попробовать снова</a>
