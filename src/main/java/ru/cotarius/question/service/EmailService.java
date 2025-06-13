@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+/**
+ * Сервис для отправки электронных писем с кодом верификации.
+ * Использует {@link JavaMailSender} для отправки простых текстовых сообщений.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,6 +20,13 @@ public class EmailService {
     private final JavaMailSender mailSender;
     private final Random random = new Random();
 
+    /**
+     * Генерирует случайный 6-значный код и отправляет его на указанный email.
+     *
+     * @param email адрес получателя
+     * @return отправленный код верификации
+     * @throws RuntimeException если отправка письма не удалась
+     */
     public String sendVerificationCode(String email) {
         String code = generateVerificationCode();
         SimpleMailMessage message = new SimpleMailMessage();
@@ -32,6 +43,11 @@ public class EmailService {
         return code;
     }
 
+    /**
+     * Генерирует случайный 6-значный числовой код верификации.
+     *
+     * @return строка с кодом
+     */
     private String generateVerificationCode() {
         return String.format("%06d", random.nextInt(1000000));
     }

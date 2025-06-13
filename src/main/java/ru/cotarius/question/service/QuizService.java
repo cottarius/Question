@@ -9,6 +9,10 @@ import ru.cotarius.question.repository.QuizQuestionRepository;
 
 import java.util.*;
 
+/**
+ * Сервис для управления логикой викторины.
+ * Использует {@link HttpSession} для хранения состояния между запросами пользователя.
+ */
 @Service
 @RequiredArgsConstructor
 public class QuizService {
@@ -16,6 +20,12 @@ public class QuizService {
     private final QuizQuestionRepository repository;
     private final HttpSession session;
 
+    /**
+     * Инициализирует сессию викторины:
+     * - загружает случайные 10 вопросов;
+     * - перемешивает их;
+     * - сбрасывает счётчик и индекс текущего вопроса.
+     */
     public void initQuizSession() {
         List<QuizQuestion> questionPool = new ArrayList<>(repository.findRandom10());
         Collections.shuffle(questionPool);
@@ -25,6 +35,12 @@ public class QuizService {
         session.setAttribute("correctCount", 0);
     }
 
+    /**
+     * Проверяет правильность ответа на текущий вопрос и при необходимости увеличивает счётчик правильных ответов.
+     *
+     * @param id     идентификатор вопроса
+     * @param answer выбранный пользователем ответ
+     */
     public void checkAnswerAndUpdate(Long id, String answer) {
         QuizQuestion question = repository.findById(id).orElseThrow();
         int correctCount = (int) session.getAttribute("correctCount");
@@ -34,6 +50,11 @@ public class QuizService {
         }
     }
 
+    /**
+     * Возвращает следующий вопрос из пула. Если вопросы закончились — возвращает редирект на финальную страницу.
+     *
+     * @return карта с текущим вопросом и списком вариантов ответов, либо редирект
+     */
     public Map<String, Object> getNextQuestion() {
         List<QuizQuestion> questionPool = (List<QuizQuestion>) session.getAttribute("questionPool");
         int currentIndex = (int) session.getAttribute("currentIndex");
@@ -59,6 +80,11 @@ public class QuizService {
         return data;
     }
 
+    /**
+     * Формирует финальный результат викторины: количество правильных ответов и общее число вопросов.
+     *
+     * @return карта с результатом викторины
+     */
     public Map<String, Object> getQuizResult() {
         int correctCount = (int) session.getAttribute("correctCount");
         List<QuizQuestion> questionPool = (List<QuizQuestion>) session.getAttribute("questionPool");

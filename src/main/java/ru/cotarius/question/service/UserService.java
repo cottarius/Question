@@ -13,6 +13,9 @@ import ru.cotarius.question.repository.UserRepository;
 
 import java.util.Optional;
 
+/**
+ * Сервис управления пользователями, включая регистрацию, верификацию email и сохранение.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,8 +25,14 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
 
-//    private static int verificationAttempts = 1;
-
+    /**
+     * Регистрирует нового пользователя с отправкой кода подтверждения на email.
+     * Если username или email уже существуют — возвращает ошибку в модель.
+     *
+     * @param user  пользовательские данные
+     * @param model модель для отображения ошибок
+     * @return путь к следующей странице
+     */
     public String registerUser(User user, Model model) {
         if(userRepository.findByUsername(user.getUsername()).isPresent()) {
             log.warn("Такой Username уже существует: {}", user.getUsername());
@@ -48,6 +57,12 @@ public class UserService {
         return "redirect:/verify-email?email=" + user.getEmail();
     }
 
+    /**
+     * Сохраняет пользователя в базе данных с шифрованием пароля и нормализацией email/username.
+     *
+     * @param user пользователь для сохранения
+     * @return сохранённый пользователь
+     */
     public User saveUser(User user) {
         user.setUsername(user.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -59,16 +74,21 @@ public class UserService {
         return savedUser;
     }
 
+    /**
+     * Верифицирует пользователя по email и коду. После 3-х неудачных попыток — удаляет пользователя.
+     *
+     * @param email email пользователя
+     * @param code  введённый код подтверждения
+     * @return true — если верификация успешна, иначе false
+     */
     public boolean verifyEmail(String email, String code) {
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setVerificationAttempts(user.getVerificationAttempts() + 1);
-//            verificationAttempts++;
 
             if (user.getVerificationCode().equals(code)) {
                 user.setEmailVerified(true);
-//                userRepository.save(user);
                 log.info("Email успешно верифицирован: {}", email);
                 return true;
             } else {
@@ -85,19 +105,21 @@ public class UserService {
         return false;
     }
 
+    /**
+     * Находит пользователя по его ID.
+     *
+     * @param id ID пользователя
+     * @return пользователь или null, если не найден
+     */
     public User findById(long id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User findByUsername(String login) {
-        return userRepository.findByUsername(login).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Нет такого пользователя с login " + login));
-    }
-
     /**
-     * Поиск пользователя по google id в репозитории. Если пользователь существует - то он возвращается. Иначе - создается новый
+     * Находит пользователя по email. Если не найден — создаёт нового с ролью USER.
+     *
      * @param email email пользователя
-     * @return пользователь
+     * @return найденный или созданный пользователь
      */
     public User findByEmailIdOrCreateNew(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);

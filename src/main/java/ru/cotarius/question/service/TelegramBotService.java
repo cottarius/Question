@@ -13,13 +13,23 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+/**
+ * Сервис Telegram-бота, использующий Spring AI ChatClient для генерации ответов.
+ * Бот принимает текстовые сообщения и отвечает на них вежливо на русском языке.
+ */
 @Component
 @Slf4j
 public class TelegramBotService extends TelegramLongPollingBot {
 
     private final ChatClient chatClient;
 
-
+    /**
+     * Конструктор TelegramBotService.
+     * Инициализирует {@link ChatClient} с русским системным промптом и in-memory историей.
+     *
+     * @param botToken токен Telegram-бота из application.properties
+     * @param builder  билдер для конфигурации AI-клиента
+     */
     @Autowired
     public TelegramBotService(@Value("${telegram.token}") String botToken, ChatClient.Builder builder) {
         super(botToken);
@@ -30,6 +40,12 @@ public class TelegramBotService extends TelegramLongPollingBot {
                 .build();
     }
 
+    /**
+     * Обрабатывает входящее обновление от Telegram.
+     * Если получено текстовое сообщение — генерирует ответ через ChatClient и отправляет его обратно.
+     *
+     * @param update входящее обновление от Telegram
+     */
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -48,11 +64,22 @@ public class TelegramBotService extends TelegramLongPollingBot {
         }
     }
 
+    /**
+     * Возвращает имя Telegram-бота.
+     *
+     * @return имя бота
+     */
     @Override
     public String getBotUsername() {
         return "Cotarius";
     }
 
+    /**
+     * Отправляет текстовое сообщение пользователю в Telegram.
+     *
+     * @param message текст для отправки
+     * @param chatID  идентификатор чата получателя
+     */
     public void sendMessage(String message, String chatID) {
         SendMessage sendMessage = new SendMessage();
         if (chatID != null) {

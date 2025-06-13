@@ -11,6 +11,20 @@ import java.util.Optional;
  * @author olegprokopenko
  */
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    /**
+     * Находит пользователя по логину.
+     *
+     * @param username логин пользователя.
+     * @return пользователь.
+     */
     Optional<User> findByUsername(String username);
+
+    /**
+     * Находит пользователя по Email.
+     *
+     * @param email email пользователя.
+     * @return пользователь.
+     */
     Optional<User> findByEmail(String email);
 }

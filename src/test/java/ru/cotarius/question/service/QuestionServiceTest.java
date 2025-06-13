@@ -1,6 +1,7 @@
 package ru.cotarius.question.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class MockitoQuestionServiceTest {
+@DisplayName("Тестирование сервиса работы с вопросами (QuestionService)")
+public class QuestionServiceTest {
 
     @InjectMocks
     private QuestionService questionService;
@@ -49,6 +51,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение главных вопросов")
     public void getPrimaryQuestionsTest(){
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
@@ -61,6 +64,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение вопросов по теме Spring")
     public void getSpringQuestionsTest(){
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
@@ -72,6 +76,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение вопросов по теме Hibernate/JDBC")
     public void getHibernateQuestionsTest(){
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
@@ -83,6 +88,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение вопросов по теме SQL")
     public void getSqlQuestionsTest(){
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
@@ -95,6 +101,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение вопросов по теме Многопоточность")
     public void getCore3QuestionsTest(){
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
@@ -108,6 +115,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение вопросов по теме Коллекции")
     public void getCore2QuestionsTest(){
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
@@ -121,6 +129,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение вопросов по теме Java Core 1")
     public void getCore1QuestionsTest(){
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
@@ -134,6 +143,7 @@ public class MockitoQuestionServiceTest {
 
 
     @Test
+    @DisplayName("Поиск вопроса по ID")
     public void testFindById() {
         Question core1Question = new Question(1L, "Вопрос 1", "Ответ 1", Theme.CORE1, true);
         when(questionRepository.findById(core1Question.getId())).thenReturn(Optional.of(core1Question));
@@ -143,6 +153,7 @@ public class MockitoQuestionServiceTest {
     }
 
     @Test
+    @DisplayName("Получение всех вопросов")
     public void testFindAll() {
         when(questionRepository.findAll()).thenReturn(Arrays.asList(core1Question, core2Question, core3Question,
                 sqlQuestion, hibernateQuestion, springQuestion, patternQuestion, technologiesQuestion));
