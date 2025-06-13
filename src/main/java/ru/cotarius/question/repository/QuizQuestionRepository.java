@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface QuizQuestionRepository extends JpaRepository<QuizQuestion, Long> {
-    // Дополнительные методы по необходимости
     @Query(value = "SELECT * FROM quiz_questions ORDER BY random() LIMIT 10", nativeQuery = true)
     List<QuizQuestion> findRandom10();
 }

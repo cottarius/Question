@@ -36,7 +36,6 @@ public class UserService {
             return "registration";
         }
 
-        // Отправка проверочного кода
         String verificationCode = emailService.sendVerificationCode(user.getEmail());
         user.setVerificationCode(verificationCode);
         user.setEmailVerified(false);
@@ -45,7 +44,6 @@ public class UserService {
 
         log.info("Пользователь временно сохранен для верификации: {}", user.getEmail());
 
-        // Перенаправление на страницу подтверждения email
         model.addAttribute("email", user.getEmail());
         return "redirect:/verify-email?email=" + user.getEmail();
     }

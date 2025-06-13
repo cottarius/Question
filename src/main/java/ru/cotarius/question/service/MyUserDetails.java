@@ -1,6 +1,5 @@
 package ru.cotarius.question.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,12 +7,8 @@ import ru.cotarius.question.entity.User;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
-@RequiredArgsConstructor
-public class MyUserDetails implements UserDetails {
-
-    private final User user;
+public record MyUserDetails(User user) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -32,7 +27,4 @@ public class MyUserDetails implements UserDetails {
         return user.getUsername();
     }
 
-    public User getUser() {
-        return user;
-    }
 }

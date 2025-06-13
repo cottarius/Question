@@ -128,7 +128,7 @@ public class UserController {
         Object principal = authentication.getPrincipal();
 
         MyUserDetails userDetails = (MyUserDetails) principal;
-        User user = userDetails.getUser();
+        User user = userDetails.user();
         String email = user.getEmail();
         String fullname = String.format("%s %s", user.getFirstname(), user.getLastname());
         String message = fullname + ", " + email + " зашел на Java Quizzer через login";
