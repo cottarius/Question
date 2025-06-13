@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Java Quizzer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="icon" href="/java-logo.jpg" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
@@ -19,57 +20,38 @@
         <a class="navbar-brand">Java Quizzer</a>
 
         <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
+                aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/index}">Main Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/all/{id}(id=0)}">All Questions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/primary/{id}(id=0)}">Primary Questions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/core1/{id}(id=0)}">JavaCore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/core2/{id}(id=0)}">JavaCore / Collections</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/core3/{id}(id=0)}">JavaCore / Multithreading</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/sql/{id}(id=0)}">SQL / Database</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/hibernate/{id}(id=0)}">Hibernate / JDBC</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/spring/{id}(id=0)}">Spring</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/patterns/{id}(id=0)}">Algorithms / Patterns</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/index}">Fashion technologies</a>
-                </li>
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" th:href="@{/index}">Main Page</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/all/{id}(id=0)}">All Questions</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/primary/{id}(id=0)}">Primary Questions</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/core1/{id}(id=0)}">JavaCore</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/core2/{id}(id=0)}">Collections</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/core3/{id}(id=0)}">Multithreading</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/sql/{id}(id=0)}">SQL</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/hibernate/{id}(id=0)}">Hibernate</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/spring/{id}(id=0)}">Spring</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/patterns/{id}(id=0)}">Patterns</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/index}">Fashion Tech</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Secondary Navbar for Search and Start Quiz Button -->
+<!-- Search Bar with 'Искать дальше' on the right -->
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
-        <!-- Search Form (Left Aligned) -->
         <form class="d-flex me-auto" method="post" action="/search">
             <input class="form-control me-2" type="text" name="query" placeholder="Search question">
             <button class="btn btn-success" type="submit">Search</button>
+            <button type="button" onclick="continueSearch()" class="btn btn-warning ms-2" th:if="${query}">
+                Continue
+            </button>
         </form>
     </div>
 </nav>
@@ -130,10 +112,9 @@
     </h5>
 </div>
 
-<!-- Bootstrap Bundle (JS + Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsH6fME1EwE1zYd2FuLZNs3Vf9ef9z6UBXo"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
